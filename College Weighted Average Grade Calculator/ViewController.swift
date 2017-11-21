@@ -10,7 +10,6 @@ import UIKit
 
 
 
-
 class MainController: UIViewController {
     
     
@@ -23,6 +22,12 @@ class MainController: UIViewController {
     var gradeView:TitleView = {
         let m = TitleView(title: "Grade")
         m.layer.cornerRadius = 6
+        return m
+    }()
+    
+    var catsContainer:TitleView = {
+        let m = TitleView(title: "Class Categories")
+        m.layer.cornerRadius = 12
         return m
     }()
     
@@ -55,8 +60,14 @@ class MainController: UIViewController {
 //        topStack.addArrangedSubview(UIView())
         topStack.addArrangedSubview(gradeView)
         
+        let spacer0 = UIView()
+        spacer0.translatesAutoresizingMaskIntoConstraints = false
+        let spacer1 = UIView()
+        spacer1.translatesAutoresizingMaskIntoConstraints = false
         mainStack.addArrangedSubview(topStack)
-        mainStack.addArrangedSubview(UIView())
+        mainStack.addArrangedSubview(spacer0)
+        mainStack.addArrangedSubview(catsContainer)
+        mainStack.addArrangedSubview(spacer1)
         
         NSLayoutConstraint.activate([
            
@@ -64,8 +75,10 @@ class MainController: UIViewController {
             percentView.heightAnchor.constraint(equalTo: percentView.widthAnchor),
             gradeView.widthAnchor.constraint(equalTo: percentView.widthAnchor),
             gradeView.heightAnchor.constraint(equalTo: percentView.heightAnchor),
-            
-            topStack.heightAnchor.constraint(equalTo: percentView.widthAnchor)
+            spacer0.heightAnchor.constraint(equalToConstant: 30),
+            spacer1.heightAnchor.constraint(equalToConstant: 50),
+            topStack.heightAnchor.constraint(equalTo: percentView.widthAnchor),
+            catsContainer.heightAnchor.constraint(lessThanOrEqualTo: mainStack.heightAnchor, multiplier: 1)
         
             
             ])

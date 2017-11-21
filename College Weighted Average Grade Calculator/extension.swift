@@ -22,6 +22,12 @@ extension UIFont {
 }
 
 extension UIColor {
+    open class var topBloo: UIColor { return UIColor.init(rgb: 0xDDFAFF) }
+    open class var bottomBloo: UIColor { return UIColor.init(rgb: 0xDBEEFF) }
+    
+}
+
+extension UIColor {
     convenience init(red: Int, green: Int, blue: Int) {
         assert(red >= 0 && red <= 255, "Invalid red component")
         assert(green >= 0 && green <= 255, "Invalid green component")

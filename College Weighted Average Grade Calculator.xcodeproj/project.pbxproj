@@ -1,0 +1,809 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3BEEFE3BF6B4D4D931CEB0BF /* Pods_College_Weighted_Average_Grade_CalculatorUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14E490FF1B853A32824CD073 /* Pods_College_Weighted_Average_Grade_CalculatorUITests.framework */; };
+		796036AD1FC2A8F4002E8FA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796036AC1FC2A8F4002E8FA3 /* AppDelegate.swift */; };
+		796036AF1FC2A8F4002E8FA3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796036AE1FC2A8F4002E8FA3 /* ViewController.swift */; };
+		796036B51FC2A8F4002E8FA3 /* College_Weighted_Average_Grade_Calculator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 796036B31FC2A8F4002E8FA3 /* College_Weighted_Average_Grade_Calculator.xcdatamodeld */; };
+		796036B71FC2A8F4002E8FA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 796036B61FC2A8F4002E8FA3 /* Assets.xcassets */; };
+		796036BA1FC2A8F4002E8FA3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 796036B81FC2A8F4002E8FA3 /* LaunchScreen.storyboard */; };
+		796036C51FC2A8F4002E8FA3 /* College_Weighted_Average_Grade_CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796036C41FC2A8F4002E8FA3 /* College_Weighted_Average_Grade_CalculatorTests.swift */; };
+		796036D01FC2A8F4002E8FA3 /* College_Weighted_Average_Grade_CalculatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796036CF1FC2A8F4002E8FA3 /* College_Weighted_Average_Grade_CalculatorUITests.swift */; };
+		79D570251FC41409005F323E /* MavenPro-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79D570201FC41409005F323E /* MavenPro-Black.ttf */; };
+		79D570261FC41409005F323E /* MavenPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79D570211FC41409005F323E /* MavenPro-Regular.ttf */; };
+		79D570271FC41409005F323E /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 79D570221FC41409005F323E /* OFL.txt */; };
+		79D570281FC41409005F323E /* MavenPro-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79D570231FC41409005F323E /* MavenPro-Medium.ttf */; };
+		79D570291FC41409005F323E /* MavenPro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79D570241FC41409005F323E /* MavenPro-Bold.ttf */; };
+		79D5702B1FC41442005F323E /* GPLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D5702A1FC41442005F323E /* GPLabel.swift */; };
+		79D5702D1FC4144A005F323E /* GPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D5702C1FC4144A005F323E /* GPView.swift */; };
+		79D570311FC41634005F323E /* extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D570301FC41634005F323E /* extension.swift */; };
+		79D570331FC41654005F323E /* GPModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D570321FC41654005F323E /* GPModel.swift */; };
+		79D570351FC41665005F323E /* GPCellViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D570341FC41664005F323E /* GPCellViews.swift */; };
+		AFC7CB8547F5395932D468D7 /* Pods_College_Weighted_Average_Grade_Calculator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C93AF0DA908952E63A4C593 /* Pods_College_Weighted_Average_Grade_Calculator.framework */; };
+		D25A0BBA1C44D73885C60BA9 /* Pods_College_Weighted_Average_Grade_CalculatorTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EA0DF2B2FA423980A3BBB16 /* Pods_College_Weighted_Average_Grade_CalculatorTests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		796036C11FC2A8F4002E8FA3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 796036A11FC2A8F4002E8FA3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 796036A81FC2A8F4002E8FA3;
+			remoteInfo = "College Weighted Average Grade Calculator";
+		};
+		796036CC1FC2A8F4002E8FA3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 796036A11FC2A8F4002E8FA3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 796036A81FC2A8F4002E8FA3;
+			remoteInfo = "College Weighted Average Grade Calculator";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		146D34A97213B3E5AEDD1908 /* Pods-College Weighted Average Grade Calculator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-College Weighted Average Grade Calculator.debug.xcconfig"; path = "Pods/Target Support Files/Pods-College Weighted Average Grade Calculator/Pods-College Weighted Average Grade Calculator.debug.xcconfig"; sourceTree = "<group>"; };
+		14E490FF1B853A32824CD073 /* Pods_College_Weighted_Average_Grade_CalculatorUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_College_Weighted_Average_Grade_CalculatorUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		33FF1BCE1D165C0933C3C545 /* Pods-College Weighted Average Grade CalculatorUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-College Weighted Average Grade CalculatorUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-College Weighted Average Grade CalculatorUITests/Pods-College Weighted Average Grade CalculatorUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		3FECB828B708FBB6FA9E6A17 /* Pods-College Weighted Average Grade Calculator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-College Weighted Average Grade Calculator.release.xcconfig"; path = "Pods/Target Support Files/Pods-College Weighted Average Grade Calculator/Pods-College Weighted Average Grade Calculator.release.xcconfig"; sourceTree = "<group>"; };
+		45BBFB23CFC94493725B58B8 /* Pods-College Weighted Average Grade CalculatorTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-College Weighted Average Grade CalculatorTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-College Weighted Average Grade CalculatorTests/Pods-College Weighted Average Grade CalculatorTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5EA0DF2B2FA423980A3BBB16 /* Pods_College_Weighted_Average_Grade_CalculatorTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_College_Weighted_Average_Grade_CalculatorTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		796036A91FC2A8F4002E8FA3 /* College Weighted Average Grade Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "College Weighted Average Grade Calculator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		796036AC1FC2A8F4002E8FA3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		796036AE1FC2A8F4002E8FA3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		796036B41FC2A8F4002E8FA3 /* College_Weighted_Average_Grade_Calculator.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = College_Weighted_Average_Grade_Calculator.xcdatamodel; sourceTree = "<group>"; };
+		796036B61FC2A8F4002E8FA3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		796036B91FC2A8F4002E8FA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		796036BB1FC2A8F4002E8FA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		796036C01FC2A8F4002E8FA3 /* College Weighted Average Grade CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "College Weighted Average Grade CalculatorTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		796036C41FC2A8F4002E8FA3 /* College_Weighted_Average_Grade_CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = College_Weighted_Average_Grade_CalculatorTests.swift; sourceTree = "<group>"; };
+		796036C61FC2A8F4002E8FA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		796036CB1FC2A8F4002E8FA3 /* College Weighted Average Grade CalculatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "College Weighted Average Grade CalculatorUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		796036CF1FC2A8F4002E8FA3 /* College_Weighted_Average_Grade_CalculatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = College_Weighted_Average_Grade_CalculatorUITests.swift; sourceTree = "<group>"; };
+		796036D11FC2A8F4002E8FA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		79D570201FC41409005F323E /* MavenPro-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MavenPro-Black.ttf"; sourceTree = "<group>"; };
+		79D570211FC41409005F323E /* MavenPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MavenPro-Regular.ttf"; sourceTree = "<group>"; };
+		79D570221FC41409005F323E /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
+		79D570231FC41409005F323E /* MavenPro-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MavenPro-Medium.ttf"; sourceTree = "<group>"; };
+		79D570241FC41409005F323E /* MavenPro-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MavenPro-Bold.ttf"; sourceTree = "<group>"; };
+		79D5702A1FC41442005F323E /* GPLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPLabel.swift; sourceTree = "<group>"; };
+		79D5702C1FC4144A005F323E /* GPView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPView.swift; sourceTree = "<group>"; };
+		79D570301FC41634005F323E /* extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extension.swift; sourceTree = "<group>"; };
+		79D570321FC41654005F323E /* GPModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPModel.swift; sourceTree = "<group>"; };
+		79D570341FC41664005F323E /* GPCellViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GPCellViews.swift; path = "../../hmm/MaxSwift/college-gpa-calculator/college-gpa-calculator/GPCellViews.swift"; sourceTree = "<group>"; };
+		7C93AF0DA908952E63A4C593 /* Pods_College_Weighted_Average_Grade_Calculator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_College_Weighted_Average_Grade_Calculator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB24B7BAC3614CAD0766D4BE /* Pods-College Weighted Average Grade CalculatorTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-College Weighted Average Grade CalculatorTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-College Weighted Average Grade CalculatorTests/Pods-College Weighted Average Grade CalculatorTests.release.xcconfig"; sourceTree = "<group>"; };
+		E4D4487DE4F50B0B331E24B9 /* Pods-College Weighted Average Grade CalculatorUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-College Weighted Average Grade CalculatorUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-College Weighted Average Grade CalculatorUITests/Pods-College Weighted Average Grade CalculatorUITests.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		796036A61FC2A8F4002E8FA3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AFC7CB8547F5395932D468D7 /* Pods_College_Weighted_Average_Grade_Calculator.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		796036BD1FC2A8F4002E8FA3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D25A0BBA1C44D73885C60BA9 /* Pods_College_Weighted_Average_Grade_CalculatorTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		796036C81FC2A8F4002E8FA3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3BEEFE3BF6B4D4D931CEB0BF /* Pods_College_Weighted_Average_Grade_CalculatorUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0DBF21D934B500F38F26BBA2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				146D34A97213B3E5AEDD1908 /* Pods-College Weighted Average Grade Calculator.debug.xcconfig */,
+				3FECB828B708FBB6FA9E6A17 /* Pods-College Weighted Average Grade Calculator.release.xcconfig */,
+				45BBFB23CFC94493725B58B8 /* Pods-College Weighted Average Grade CalculatorTests.debug.xcconfig */,
+				BB24B7BAC3614CAD0766D4BE /* Pods-College Weighted Average Grade CalculatorTests.release.xcconfig */,
+				33FF1BCE1D165C0933C3C545 /* Pods-College Weighted Average Grade CalculatorUITests.debug.xcconfig */,
+				E4D4487DE4F50B0B331E24B9 /* Pods-College Weighted Average Grade CalculatorUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		1E37AC500C867B8B57ED7D2E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7C93AF0DA908952E63A4C593 /* Pods_College_Weighted_Average_Grade_Calculator.framework */,
+				5EA0DF2B2FA423980A3BBB16 /* Pods_College_Weighted_Average_Grade_CalculatorTests.framework */,
+				14E490FF1B853A32824CD073 /* Pods_College_Weighted_Average_Grade_CalculatorUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		796036A01FC2A8F4002E8FA3 = {
+			isa = PBXGroup;
+			children = (
+				796036AB1FC2A8F4002E8FA3 /* College Weighted Average Grade Calculator */,
+				796036C31FC2A8F4002E8FA3 /* College Weighted Average Grade CalculatorTests */,
+				796036CE1FC2A8F4002E8FA3 /* College Weighted Average Grade CalculatorUITests */,
+				796036AA1FC2A8F4002E8FA3 /* Products */,
+				0DBF21D934B500F38F26BBA2 /* Pods */,
+				1E37AC500C867B8B57ED7D2E /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		796036AA1FC2A8F4002E8FA3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				796036A91FC2A8F4002E8FA3 /* College Weighted Average Grade Calculator.app */,
+				796036C01FC2A8F4002E8FA3 /* College Weighted Average Grade CalculatorTests.xctest */,
+				796036CB1FC2A8F4002E8FA3 /* College Weighted Average Grade CalculatorUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		796036AB1FC2A8F4002E8FA3 /* College Weighted Average Grade Calculator */ = {
+			isa = PBXGroup;
+			children = (
+				79D5701F1FC41409005F323E /* Maven_Pro */,
+				79D5702A1FC41442005F323E /* GPLabel.swift */,
+				796036AC1FC2A8F4002E8FA3 /* AppDelegate.swift */,
+				79D570301FC41634005F323E /* extension.swift */,
+				79D570341FC41664005F323E /* GPCellViews.swift */,
+				796036AE1FC2A8F4002E8FA3 /* ViewController.swift */,
+				79D570321FC41654005F323E /* GPModel.swift */,
+				79D5702C1FC4144A005F323E /* GPView.swift */,
+				796036B61FC2A8F4002E8FA3 /* Assets.xcassets */,
+				796036B81FC2A8F4002E8FA3 /* LaunchScreen.storyboard */,
+				796036BB1FC2A8F4002E8FA3 /* Info.plist */,
+				796036B31FC2A8F4002E8FA3 /* College_Weighted_Average_Grade_Calculator.xcdatamodeld */,
+			);
+			path = "College Weighted Average Grade Calculator";
+			sourceTree = "<group>";
+		};
+		796036C31FC2A8F4002E8FA3 /* College Weighted Average Grade CalculatorTests */ = {
+			isa = PBXGroup;
+			children = (
+				796036C41FC2A8F4002E8FA3 /* College_Weighted_Average_Grade_CalculatorTests.swift */,
+				796036C61FC2A8F4002E8FA3 /* Info.plist */,
+			);
+			path = "College Weighted Average Grade CalculatorTests";
+			sourceTree = "<group>";
+		};
+		796036CE1FC2A8F4002E8FA3 /* College Weighted Average Grade CalculatorUITests */ = {
+			isa = PBXGroup;
+			children = (
+				796036CF1FC2A8F4002E8FA3 /* College_Weighted_Average_Grade_CalculatorUITests.swift */,
+				796036D11FC2A8F4002E8FA3 /* Info.plist */,
+			);
+			path = "College Weighted Average Grade CalculatorUITests";
+			sourceTree = "<group>";
+		};
+		79D5701F1FC41409005F323E /* Maven_Pro */ = {
+			isa = PBXGroup;
+			children = (
+				79D570201FC41409005F323E /* MavenPro-Black.ttf */,
+				79D570211FC41409005F323E /* MavenPro-Regular.ttf */,
+				79D570221FC41409005F323E /* OFL.txt */,
+				79D570231FC41409005F323E /* MavenPro-Medium.ttf */,
+				79D570241FC41409005F323E /* MavenPro-Bold.ttf */,
+			);
+			path = Maven_Pro;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		796036A81FC2A8F4002E8FA3 /* College Weighted Average Grade Calculator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 796036D41FC2A8F4002E8FA3 /* Build configuration list for PBXNativeTarget "College Weighted Average Grade Calculator" */;
+			buildPhases = (
+				E318F15286E05680109A7E42 /* [CP] Check Pods Manifest.lock */,
+				796036A51FC2A8F4002E8FA3 /* Sources */,
+				796036A61FC2A8F4002E8FA3 /* Frameworks */,
+				796036A71FC2A8F4002E8FA3 /* Resources */,
+				CDB3FD29BD8F7A5B444B9A9C /* [CP] Embed Pods Frameworks */,
+				8CF89240B24B862583F1AAD9 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "College Weighted Average Grade Calculator";
+			productName = "College Weighted Average Grade Calculator";
+			productReference = 796036A91FC2A8F4002E8FA3 /* College Weighted Average Grade Calculator.app */;
+			productType = "com.apple.product-type.application";
+		};
+		796036BF1FC2A8F4002E8FA3 /* College Weighted Average Grade CalculatorTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 796036D71FC2A8F4002E8FA3 /* Build configuration list for PBXNativeTarget "College Weighted Average Grade CalculatorTests" */;
+			buildPhases = (
+				050D0E875F601F8183C62C9F /* [CP] Check Pods Manifest.lock */,
+				796036BC1FC2A8F4002E8FA3 /* Sources */,
+				796036BD1FC2A8F4002E8FA3 /* Frameworks */,
+				796036BE1FC2A8F4002E8FA3 /* Resources */,
+				12D81F6C846A639E3702DC80 /* [CP] Embed Pods Frameworks */,
+				F41F812F96E66C5E8F044FD0 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				796036C21FC2A8F4002E8FA3 /* PBXTargetDependency */,
+			);
+			name = "College Weighted Average Grade CalculatorTests";
+			productName = "College Weighted Average Grade CalculatorTests";
+			productReference = 796036C01FC2A8F4002E8FA3 /* College Weighted Average Grade CalculatorTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		796036CA1FC2A8F4002E8FA3 /* College Weighted Average Grade CalculatorUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 796036DA1FC2A8F4002E8FA3 /* Build configuration list for PBXNativeTarget "College Weighted Average Grade CalculatorUITests" */;
+			buildPhases = (
+				6A1A4A9E74FA01F4508EEAD8 /* [CP] Check Pods Manifest.lock */,
+				796036C71FC2A8F4002E8FA3 /* Sources */,
+				796036C81FC2A8F4002E8FA3 /* Frameworks */,
+				796036C91FC2A8F4002E8FA3 /* Resources */,
+				C7330A9DE955B7ECF7522E20 /* [CP] Embed Pods Frameworks */,
+				0050787E26E12AD154F55B16 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				796036CD1FC2A8F4002E8FA3 /* PBXTargetDependency */,
+			);
+			name = "College Weighted Average Grade CalculatorUITests";
+			productName = "College Weighted Average Grade CalculatorUITests";
+			productReference = 796036CB1FC2A8F4002E8FA3 /* College Weighted Average Grade CalculatorUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		796036A11FC2A8F4002E8FA3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0900;
+				LastUpgradeCheck = 0900;
+				ORGANIZATIONNAME = AsherApps;
+				TargetAttributes = {
+					796036A81FC2A8F4002E8FA3 = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
+					796036BF1FC2A8F4002E8FA3 = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 796036A81FC2A8F4002E8FA3;
+					};
+					796036CA1FC2A8F4002E8FA3 = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 796036A81FC2A8F4002E8FA3;
+					};
+				};
+			};
+			buildConfigurationList = 796036A41FC2A8F4002E8FA3 /* Build configuration list for PBXProject "College Weighted Average Grade Calculator" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 796036A01FC2A8F4002E8FA3;
+			productRefGroup = 796036AA1FC2A8F4002E8FA3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				796036A81FC2A8F4002E8FA3 /* College Weighted Average Grade Calculator */,
+				796036BF1FC2A8F4002E8FA3 /* College Weighted Average Grade CalculatorTests */,
+				796036CA1FC2A8F4002E8FA3 /* College Weighted Average Grade CalculatorUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		796036A71FC2A8F4002E8FA3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				79D570271FC41409005F323E /* OFL.txt in Resources */,
+				79D570291FC41409005F323E /* MavenPro-Bold.ttf in Resources */,
+				796036BA1FC2A8F4002E8FA3 /* LaunchScreen.storyboard in Resources */,
+				79D570251FC41409005F323E /* MavenPro-Black.ttf in Resources */,
+				796036B71FC2A8F4002E8FA3 /* Assets.xcassets in Resources */,
+				79D570261FC41409005F323E /* MavenPro-Regular.ttf in Resources */,
+				79D570281FC41409005F323E /* MavenPro-Medium.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		796036BE1FC2A8F4002E8FA3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		796036C91FC2A8F4002E8FA3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0050787E26E12AD154F55B16 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-College Weighted Average Grade CalculatorUITests/Pods-College Weighted Average Grade CalculatorUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		050D0E875F601F8183C62C9F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		12D81F6C846A639E3702DC80 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-College Weighted Average Grade CalculatorTests/Pods-College Weighted Average Grade CalculatorTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6A1A4A9E74FA01F4508EEAD8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8CF89240B24B862583F1AAD9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-College Weighted Average Grade Calculator/Pods-College Weighted Average Grade Calculator-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C7330A9DE955B7ECF7522E20 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-College Weighted Average Grade CalculatorUITests/Pods-College Weighted Average Grade CalculatorUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CDB3FD29BD8F7A5B444B9A9C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-College Weighted Average Grade Calculator/Pods-College Weighted Average Grade Calculator-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E318F15286E05680109A7E42 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F41F812F96E66C5E8F044FD0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-College Weighted Average Grade CalculatorTests/Pods-College Weighted Average Grade CalculatorTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		796036A51FC2A8F4002E8FA3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				79D570331FC41654005F323E /* GPModel.swift in Sources */,
+				796036B51FC2A8F4002E8FA3 /* College_Weighted_Average_Grade_Calculator.xcdatamodeld in Sources */,
+				79D570311FC41634005F323E /* extension.swift in Sources */,
+				796036AF1FC2A8F4002E8FA3 /* ViewController.swift in Sources */,
+				796036AD1FC2A8F4002E8FA3 /* AppDelegate.swift in Sources */,
+				79D5702B1FC41442005F323E /* GPLabel.swift in Sources */,
+				79D5702D1FC4144A005F323E /* GPView.swift in Sources */,
+				79D570351FC41665005F323E /* GPCellViews.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		796036BC1FC2A8F4002E8FA3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				796036C51FC2A8F4002E8FA3 /* College_Weighted_Average_Grade_CalculatorTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		796036C71FC2A8F4002E8FA3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				796036D01FC2A8F4002E8FA3 /* College_Weighted_Average_Grade_CalculatorUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		796036C21FC2A8F4002E8FA3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 796036A81FC2A8F4002E8FA3 /* College Weighted Average Grade Calculator */;
+			targetProxy = 796036C11FC2A8F4002E8FA3 /* PBXContainerItemProxy */;
+		};
+		796036CD1FC2A8F4002E8FA3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 796036A81FC2A8F4002E8FA3 /* College Weighted Average Grade Calculator */;
+			targetProxy = 796036CC1FC2A8F4002E8FA3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		796036B81FC2A8F4002E8FA3 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				796036B91FC2A8F4002E8FA3 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		796036D21FC2A8F4002E8FA3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		796036D31FC2A8F4002E8FA3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		796036D51FC2A8F4002E8FA3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 146D34A97213B3E5AEDD1908 /* Pods-College Weighted Average Grade Calculator.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VETRU2J3NX;
+				INFOPLIST_FILE = "College Weighted Average Grade Calculator/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.maxnelsondevelopment.College-Weighted-Average-Grade-Calculator";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		796036D61FC2A8F4002E8FA3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3FECB828B708FBB6FA9E6A17 /* Pods-College Weighted Average Grade Calculator.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VETRU2J3NX;
+				INFOPLIST_FILE = "College Weighted Average Grade Calculator/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.maxnelsondevelopment.College-Weighted-Average-Grade-Calculator";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		796036D81FC2A8F4002E8FA3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 45BBFB23CFC94493725B58B8 /* Pods-College Weighted Average Grade CalculatorTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VETRU2J3NX;
+				INFOPLIST_FILE = "College Weighted Average Grade CalculatorTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.maxnelsondevelopment.College-Weighted-Average-Grade-CalculatorTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/College Weighted Average Grade Calculator.app/College Weighted Average Grade Calculator";
+			};
+			name = Debug;
+		};
+		796036D91FC2A8F4002E8FA3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BB24B7BAC3614CAD0766D4BE /* Pods-College Weighted Average Grade CalculatorTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VETRU2J3NX;
+				INFOPLIST_FILE = "College Weighted Average Grade CalculatorTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.maxnelsondevelopment.College-Weighted-Average-Grade-CalculatorTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/College Weighted Average Grade Calculator.app/College Weighted Average Grade Calculator";
+			};
+			name = Release;
+		};
+		796036DB1FC2A8F4002E8FA3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 33FF1BCE1D165C0933C3C545 /* Pods-College Weighted Average Grade CalculatorUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VETRU2J3NX;
+				INFOPLIST_FILE = "College Weighted Average Grade CalculatorUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.maxnelsondevelopment.College-Weighted-Average-Grade-CalculatorUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "College Weighted Average Grade Calculator";
+			};
+			name = Debug;
+		};
+		796036DC1FC2A8F4002E8FA3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E4D4487DE4F50B0B331E24B9 /* Pods-College Weighted Average Grade CalculatorUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VETRU2J3NX;
+				INFOPLIST_FILE = "College Weighted Average Grade CalculatorUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.maxnelsondevelopment.College-Weighted-Average-Grade-CalculatorUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "College Weighted Average Grade Calculator";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		796036A41FC2A8F4002E8FA3 /* Build configuration list for PBXProject "College Weighted Average Grade Calculator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				796036D21FC2A8F4002E8FA3 /* Debug */,
+				796036D31FC2A8F4002E8FA3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		796036D41FC2A8F4002E8FA3 /* Build configuration list for PBXNativeTarget "College Weighted Average Grade Calculator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				796036D51FC2A8F4002E8FA3 /* Debug */,
+				796036D61FC2A8F4002E8FA3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		796036D71FC2A8F4002E8FA3 /* Build configuration list for PBXNativeTarget "College Weighted Average Grade CalculatorTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				796036D81FC2A8F4002E8FA3 /* Debug */,
+				796036D91FC2A8F4002E8FA3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		796036DA1FC2A8F4002E8FA3 /* Build configuration list for PBXNativeTarget "College Weighted Average Grade CalculatorUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				796036DB1FC2A8F4002E8FA3 /* Debug */,
+				796036DC1FC2A8F4002E8FA3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		796036B31FC2A8F4002E8FA3 /* College_Weighted_Average_Grade_Calculator.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				796036B41FC2A8F4002E8FA3 /* College_Weighted_Average_Grade_Calculator.xcdatamodel */,
+			);
+			currentVersion = 796036B41FC2A8F4002E8FA3 /* College_Weighted_Average_Grade_Calculator.xcdatamodel */;
+			path = College_Weighted_Average_Grade_Calculator.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 796036A11FC2A8F4002E8FA3 /* Project object */;
+}

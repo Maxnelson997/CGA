@@ -1,0 +1,6 @@
+framework module Pods_College_Weighted_Average_Grade_CalculatorTests {
+  umbrella header "Pods-College Weighted Average Grade CalculatorTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

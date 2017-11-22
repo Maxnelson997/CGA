@@ -58,8 +58,9 @@ class TBHeader:UIStackView {
 class CatCell:UITableViewCell {
 
     
-    let cat:GPLabel = {
-        let n =  GPLabel()
+    let cat:UITextField = {
+        let n =  UITextField()
+        n.font = UIFont.init(customFont: .MavenProBold, withSize: 15)
         n.text = "category"
         n.textAlignment = .left
         n.backgroundColor = .clear
@@ -148,6 +149,9 @@ extension MainController: UITableViewDelegate, UITableViewDataSource {
         cell.cat.text = model.classes[indexPath.item].name
         cell.earnedBox.text = model.classes[indexPath.item].earned
         cell.totalBox.text = model.classes[indexPath.item].total
+        cell.cat.delegate = self
+        cell.earnedBox.delegate = self
+        cell.totalBox.delegate = self
         cell.selectionStyle = .none
         return cell
     }
@@ -160,10 +164,31 @@ extension MainController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
-class MainController: UIViewController {
+class MainController: UIViewController, UITextFieldDelegate {
+    var currentField:UITextField = UITextField()
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        view.animateView(direction: .up, distance: 150)
+        dismissButton.alpha = 1
+        currentField = textField
+    }
+    
+    @objc func dismissField() {
+        currentField.resignFirstResponder()
+        view.animateView(direction: .up, distance: -150)
+        dismissButton.alpha = 0
+    }
     
     let model = GPModel.sharedInstance
 
+    var dismissButton:UIButton = {
+        let n = UIButton()
+        n.backgroundColor = UIColor.cellColor.withAlphaComponent(0.54)
+        n.translatesAutoresizingMaskIntoConstraints = false
+        n.alpha = 0
+        return n
+    }()
+    
     var tb:UITableView = {
         let t = UITableView(frame: .zero)
         t.translatesAutoresizingMaskIntoConstraints = false
@@ -253,6 +278,10 @@ class MainController: UIViewController {
         mainStack.addArrangedSubview(catsContainer)
         mainStack.addArrangedSubview(controlStack)
         mainStack.addArrangedSubview(spacer1)
+        
+        view.addSubview(dismissButton)
+        NSLayoutConstraint.activate(dismissButton.getConstraintsOfView(to: view))
+        dismissButton.addTarget(self, action: #selector(self.dismissField), for: .touchUpInside)
         
         catsContainer.addSubview(tb)
         NSLayoutConstraint.activate(tb.getConstraintsOfView(to: catsContainer, withInsets: UIEdgeInsets(top: 60, left: 10, bottom: -5, right: -10)))

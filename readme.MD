@@ -18,9 +18,9 @@
 
 - [x] add ability to add a category
 
-- [ ] add ability to remove a category
+- [x] add ability to remove a category
 
-- [ ] change category label in catcell to a textfield
+- [x] change category label in catcell to a textfield
 
 ## Next Objectives
 

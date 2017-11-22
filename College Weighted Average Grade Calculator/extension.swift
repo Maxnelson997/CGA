@@ -56,10 +56,11 @@ extension UIFont {
 }
 
 extension UIColor {
-    open class var topBloo: UIColor { return UIColor.init(rgb: 0xDDFAFF) }
-    open class var bottomBloo: UIColor { return UIColor.init(rgb: 0xDBEEFF) }
+    open class var topBloo1: UIColor { return UIColor.init(rgb: 0xDDFAFF) }
+    open class var bottomBloo: UIColor { return UIColor.init(rgb: 0xFFFFFF) }
+//        open class var bottomBloo: UIColor { return UIColor.init(rgb: 0xDBEEFF) }
     open class var cellColor: UIColor { return UIColor.init(rgb: 0x232020).withAlphaComponent(0.54) }
-    
+    open class var topBloo: UIColor { return UIColor.init(rgb: 0x3DD2FF/*0x9BE8FF*/) }
 }
 
 extension UIColor {

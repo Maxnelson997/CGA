@@ -260,6 +260,7 @@ class MainController: UIViewController, UITextFieldDelegate {
     var new_class_cons:[NSLayoutConstraint]!
     
     @objc func add_class() {
+        doneRemoving()
         new_class_cons = new_class_view.getConstraintsOfView(to: catsContainer, withInsets: UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0))
         catsContainer.addSubview(new_class_view)
         NSLayoutConstraint.activate(new_class_cons)
@@ -282,6 +283,7 @@ class MainController: UIViewController, UITextFieldDelegate {
         removingClass = true
         minusButton.gestureRecognizers?.removeAll()
         minusButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.doneRemoving)))
+        
         minusButton.text = "done"
         tb.reloadData()
     }

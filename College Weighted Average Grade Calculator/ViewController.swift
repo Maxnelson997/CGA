@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Font_Awesome_Swift
 
 class TBHeader:UIStackView {
     
@@ -55,8 +56,14 @@ class TBHeader:UIStackView {
     }
 }
 
+protocol DeleteProtocol {
+    func ReloadTB()
+}
+
 class CatCell:UITableViewCell {
 
+    var removingClass:Bool = false
+    var deli:DeleteProtocol!
     
     let cat:UITextField = {
         let n =  UITextField()
@@ -104,41 +111,102 @@ class CatCell:UITableViewCell {
         v.layer.masksToBounds = true
         return v
     }()
-            let space = UIView()
-    override func awakeFromNib() {
-        self.backgroundColor = .clear
-        container.backgroundColor = UIColor.cellColor
-        contentView.addSubview(container)
-        container.addSubview(stack)
-        NSLayoutConstraint.activate(container.getConstraintsOfView(to: self.contentView, withInsets: UIEdgeInsets(top: 10, left: 0, bottom: -10, right: 0)))
-        NSLayoutConstraint.activate(stack.getConstraintsOfView(to: container))
 
-        space.translatesAutoresizingMaskIntoConstraints = false
-        stack.addArrangedSubview(space)
-        stack.addArrangedSubview(cat)
-        stack.addArrangedSubview(earnedBox)
-        stack.addArrangedSubview(totalBox)
-        
-        NSLayoutConstraint.activate([
-            space.widthAnchor.constraint(equalToConstant: 5),
-            cat.widthAnchor.constraint(lessThanOrEqualTo: stack.widthAnchor, multiplier: 1/3),
-            earnedBox.widthAnchor.constraint(equalTo: stack.widthAnchor, multiplier: 1/3),
-            totalBox.widthAnchor.constraint(equalTo: stack.widthAnchor, multiplier: 1/3)
-            ])
-        
+  
+    let removeButton:UIButton = {
+        let b = UIButton()
+        b.translatesAutoresizingMaskIntoConstraints = false
+        b.backgroundColor = .clear
+        b.setFAIcon(icon: FAType.FARemove, forState: .normal)
+        b.setFATitleColor(color: .orange)
+        return b
+    }()
+ 
+
+    var exists:Bool = false
+    var rwidth:NSLayoutConstraint!
+    var rwidth1:NSLayoutConstraint!
+    override func awakeFromNib() {
+
+        if !exists {
+            exists = true
+            self.backgroundColor = .clear
+            container.backgroundColor = UIColor.cellColor
+            contentView.addSubview(container)
+            container.addSubview(stack)
+            NSLayoutConstraint.activate(container.getConstraintsOfView(to: self.contentView, withInsets: UIEdgeInsets(top: 10, left: 0, bottom: -10, right: 0)))
+            NSLayoutConstraint.activate(stack.getConstraintsOfView(to: container))
+            
+            
+            
+            stack.addArrangedSubview(removeButton)
+            
+            stack.addArrangedSubview(cat)
+            stack.addArrangedSubview(earnedBox)
+            stack.addArrangedSubview(totalBox)
+            
+            rwidth = removeButton.widthAnchor.constraint(equalToConstant: 5)
+            rwidth1 = cat.widthAnchor.constraint(lessThanOrEqualTo: stack.widthAnchor, multiplier: 1/3)
+            
+            
+            
+            NSLayoutConstraint.activate([
+                rwidth,
+                rwidth1,
+                earnedBox.widthAnchor.constraint(lessThanOrEqualTo: stack.widthAnchor, multiplier: 1/3),
+                totalBox.widthAnchor.constraint(equalTo: stack.widthAnchor, multiplier: 1/3)
+                
+                ])
+            
+            removeButton.addTarget(self, action: #selector(self.removeCategoryFromTB), for: .touchUpInside)
+
+        } else {
+            if removingClass {
+                removeButton.alpha = 1
+                rwidth.constant = 45
+                rwidth1.constant = -45
+                
+
+            } else {
+                removeButton.alpha = 0
+                rwidth.constant = 5
+                rwidth1.constant = 0
+            }
+            
+            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: [], animations: {
+                self.stack.layoutIfNeeded()
+            }, completion: nil)
+            
+        }
+
+    }
+    
+    @objc func removeCategoryFromTB() {
+        GPModel.sharedInstance.classes.remove(at: removeButton.tag)
+//        deli.ReloadTB()
     }
     
     override func prepareForReuse() {
-        stack.removeArrangedSubview(space)
-        stack.removeArrangedSubview(cat)
-        stack.removeArrangedSubview(earnedBox)
-        stack.removeArrangedSubview(totalBox)
-        stack.removeFromSuperview()
+//        stack.removeArrangedSubview(removeButton)
+//
+//        stack.removeArrangedSubview(cat)
+//        stack.removeArrangedSubview(earnedBox)
+//        stack.removeArrangedSubview(totalBox)
+//        stack.removeFromSuperview()
     }
     
 }
 
-extension MainController: UITableViewDelegate, UITableViewDataSource {
+extension MainController: UITableViewDelegate, UITableViewDataSource, DeleteProtocol {
+    
+    //deleteprotocol
+    func ReloadTB() {
+        removingClass = false
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
+            self.tb.reloadData()
+        }
+    }
+    
     //datasource
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -149,6 +217,7 @@ extension MainController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CatCell", for: indexPath) as! CatCell
+        cell.removingClass = removingClass
         cell.awakeFromNib()
         cell.cat.text = model.classes[indexPath.item].name
         cell.earnedBox.text = model.classes[indexPath.item].earned
@@ -156,6 +225,9 @@ extension MainController: UITableViewDelegate, UITableViewDataSource {
         cell.cat.delegate = self
         cell.earnedBox.delegate = self
         cell.totalBox.delegate = self
+        cell.deli = self
+
+
         cell.selectionStyle = .none
         return cell
     }
@@ -195,18 +267,40 @@ class MainController: UIViewController, UITextFieldDelegate {
         minusButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.cancelAddingClass)))
         plusButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.completeAddingClass)))
         
-        
         minusButton.text = "cancel"
         plusButton.text = "add class"
+    }
+    
+    var removingClass:Bool = false
+    
+    @objc func remove_class() {
+        removingClass = true
+        minusButton.gestureRecognizers?.removeAll()
+        minusButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.doneRemoving)))
+        minusButton.text = "done"
+        tb.reloadData()
+    }
+    
+    @objc func doneRemoving() {
+        removingClass = false
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
+            self.tb.reloadData()
+        }
+        minusButton.text = "-"
+        minusButton.gestureRecognizers?.removeAll()
+        minusButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.remove_class)))
     }
     
     @objc func cancelAddingClass() {
         minusButton.text = "-"
         plusButton.text = "+"
         new_class_view.removeFromSuperview()
+        
         minusButton.gestureRecognizers?.removeAll()
         plusButton.gestureRecognizers?.removeAll()
+        
         plusButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.add_class)))
+        minusButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.remove_class)))
         tb.alpha = 1
     }
     
@@ -324,6 +418,7 @@ class MainController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         self.view = MaxView(frame: UIScreen.main.bounds)
         plusButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.add_class)))
+        minusButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.remove_class)))
         view.addSubview(mainStack)
         NSLayoutConstraint.activate(mainStack.getConstraintsOfView(to: view, withInsets: UIEdgeInsets(top: 80, left: 30, bottom: 20, right: -30)))
 

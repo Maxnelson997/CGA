@@ -12,9 +12,9 @@
 	
 	
 ## Next Objectives
-- [ ] animate screen when a textfield is focused
+- [x] animate screen when a textfield is focused
 
-- [ ] add gesture recognizer to dismiss keyboard when user taps screen while textfield is focused
+- [x] add gesture recognizer to dismiss keyboard when user taps screen while textfield is focused
 
 - [ ] add ability to add a category
 

@@ -293,4 +293,62 @@ func calculate_class_gpa(grade:String, hour:Double) -> Double {
 //    return gpa
     return grade_value
 }
+
+//
+
+func calculate_average() -> CGFloat {
+    
+    var totalPercent:CGFloat = 0.0
+    
+    
+    for c in GPModel.sharedInstance.classes {
+        let index = c.total.index(c.total.startIndex, offsetBy: c.total.count - 1)
+        let percentListedString = c.total[..<index]
+        guard let percentageListedFloat = NumberFormatter().number(from: String(percentListedString)) else { return 0 }
+        let floatPercent = CGFloat(truncating: percentageListedFloat)
+        
+        let index1 = c.earned.index(c.earned.startIndex, offsetBy: c.earned.count - 1)
+        let percentListedString1 = c.earned[..<index1]
+        guard let percentageListedFloat1 = NumberFormatter().number(from: String(percentListedString1)) else { return 0 }
+        let floatPercent1 = CGFloat(truncating: percentageListedFloat1)
+        
+        let worth = (floatPercent1 / 100.0) * floatPercent
+        
+        totalPercent += worth
+    }
+    print("totalPercent: \(String(describing: totalPercent))")
+    
+    return totalPercent
+    
+}
+
+struct GradeRange {
+    var range:Range<Double>!
+    var value:String!
+    
+    
+}
+
+let ranges:[GradeRange] = [
+    GradeRange(range: 94.0-1..<100.0, value: "A"),
+    GradeRange(range: 90.0..<93.9+1.0, value: "A-"),
+    GradeRange(range: 86.0..<89.9+1.0, value: "B+"),
+    GradeRange(range: 83.0..<86.0+1.0, value: "B"),
+    GradeRange(range: 80.0..<82.9+1.0, value: "B-"),
+    GradeRange(range: 76.0..<79.9+1.0, value: "C+"),
+    GradeRange(range: 73.0..<75.9+1.0, value: "C"),
+    GradeRange(range: 70.0..<72.9+1.0, value: "C-"),
+    GradeRange(range: 66.0..<69.9+1.0, value: "D+"),
+    GradeRange(range: 63.0..<65.9+1.0, value: "D"),
+    GradeRange(range: 60.0..<62.9+1.0, value: "D-"),
+    GradeRange(range: 0.0..<59.9+1.0, value: "F")
+]
+
+
+func get_grade_from_average(percent:CGFloat) -> String {
+    for r in ranges {
+        if r.range.contains(Double(percent)) {return r.value}
+    }
+    return "🤔"
+}
     

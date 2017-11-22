@@ -96,12 +96,18 @@ class CatCell:UITableViewCell {
         return s
     }()
 
-    let container:UIView = UIView()
+    let container:UIView = {
+        let v = UIView()
+        v.translatesAutoresizingMaskIntoConstraints = false
+        v.layer.cornerRadius = 6
+        v.layer.masksToBounds = true
+        return v
+    }()
+    
     override func awakeFromNib() {
         self.backgroundColor = .clear
         container.backgroundColor = UIColor.cellColor
         contentView.addSubview(container)
-        container.translatesAutoresizingMaskIntoConstraints = false
         container.addSubview(stack)
         NSLayoutConstraint.activate(container.getConstraintsOfView(to: self.contentView, withInsets: UIEdgeInsets(top: 10, left: 0, bottom: -10, right: 0)))
         NSLayoutConstraint.activate(stack.getConstraintsOfView(to: container))

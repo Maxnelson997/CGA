@@ -10,8 +10,9 @@ import UIKit
 
 
 
+
+
 class MainController: UIViewController {
-    
     
     var percentView:TitleView = {
         let m = TitleView(title: "Percent", viewRadius: 20)

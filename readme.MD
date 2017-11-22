@@ -1,8 +1,8 @@
 ## objectives -- current.
 
-- [ ] add percent label
+- [x] add percent label
 
-- [ ]  add grade label
+- [x]  add grade label
 
 - [ ] create custom tableview
 

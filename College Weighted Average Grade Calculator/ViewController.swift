@@ -9,6 +9,15 @@
 import UIKit
 import Font_Awesome_Swift
 
+extension UITableView {
+    func reloadData(completion: @escaping ()->()) {
+        UIView.animate(withDuration: 0, animations: { self.reloadData() })
+        { _ in completion() }
+    }
+}
+
+
+
 class TBHeader:UIStackView {
     
     let cat:GPLabel = {
@@ -208,7 +217,12 @@ extension MainController: UITableViewDelegate, UITableViewDataSource, DeleteProt
     func ReloadTB() {
     
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
-            self.tb.reloadData()
+            self.tb.reloadData {
+                //upon completion of reload, re calculate. wait this aint fkin necessary; the model already updated!
+                let totalPercent = calculate_average()
+                self.percentView.centerLabel.text = String(describing: totalPercent)
+                self.gradeView.centerLabel.text = get_grade_from_average(percent: totalPercent)
+            }
         }
     }
     
@@ -285,13 +299,26 @@ class MainController: UIViewController, UITextFieldDelegate {
         minusButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.doneRemoving)))
         
         minusButton.text = "done"
-        tb.reloadData()
+        tb.reloadData {
+            //upon completion of reload, re calculate. wait this aint fkin necessary; the model already updated!
+            let totalPercent = calculate_average()
+            self.percentView.centerLabel.text = String(describing: totalPercent)
+            self.gradeView.centerLabel.text = get_grade_from_average(percent: totalPercent)
+        }
+        
     }
     
+    
+
     @objc func doneRemoving() {
         removingClass = false
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
-            self.tb.reloadData()
+            self.tb.reloadData {
+                //upon completion of reload, re calculate. wait this aint fkin necessary; the model already updated!
+                let totalPercent = calculate_average()
+                self.percentView.centerLabel.text = String(describing: totalPercent)
+                self.gradeView.centerLabel.text = get_grade_from_average(percent: totalPercent)
+            }
         }
         minusButton.text = "-"
         minusButton.gestureRecognizers?.removeAll()
@@ -318,7 +345,12 @@ class MainController: UIViewController, UITextFieldDelegate {
             cancelAddingClass()
             let newClass = classModel(name: new_class_view.type_name, earned: new_class_view.selected_earned_percentage, total: new_class_view.selected_percentage_oftotal)
             model.classes.append(newClass)
-            tb.reloadData()
+            tb.reloadData {
+                //upon completion of reload, re calculate. wait this aint fkin necessary; the model already updated!
+                let totalPercent = calculate_average()
+                self.percentView.centerLabel.text = String(describing: totalPercent)
+                self.gradeView.centerLabel.text = get_grade_from_average(percent: totalPercent)
+            }
             //success
         } else {
             //cmon bill, pls fill the damn form out.

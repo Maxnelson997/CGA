@@ -14,32 +14,31 @@ class MainController: UIViewController {
     
     
     var percentView:TitleView = {
-        let m = TitleView(title: "Percent")
-        m.layer.cornerRadius = 12
+        let m = TitleView(title: "Percent", viewRadius: 20)
+
         return m
     }()
     
     var gradeView:TitleView = {
-        let m = TitleView(title: "Grade")
-        m.layer.cornerRadius = 12
+        let m = TitleView(title: "Grade", viewRadius: 20)
         return m
     }()
     
     var catsContainer:TitleView = {
-        let m = TitleView(title: "Class Categories", perfectSquare: false)
-        m.layer.cornerRadius = 20
+        let m = TitleView(title: "Class Categories", perfectSquare: false, viewRadius: 20)
+    
         return m
     }()
     
     var plusButton:TitleInView = {
-        let m = TitleInView(title: "+")
-        m.layer.cornerRadius = 20
+        let m = TitleInView(title: "+", viewRadius: 20)
+
         return m
     }()
     
     var minusButton:TitleInView = {
-        let m = TitleInView(title: "-")
-        m.layer.cornerRadius = 20
+        let m = TitleInView(title: "-", viewRadius: 20)
+
         return m
     }()
     
@@ -55,6 +54,7 @@ class MainController: UIViewController {
         let s = UIStackView()
         s.translatesAutoresizingMaskIntoConstraints = false
         s.axis = UILayoutConstraintAxis.horizontal
+        s.spacing = 20
         return s
     }()
     
@@ -62,6 +62,8 @@ class MainController: UIViewController {
         let s = UIStackView()
         s.translatesAutoresizingMaskIntoConstraints = false
         s.axis = .horizontal
+        s.spacing = 20
+        
         return s
     }()
     
@@ -72,7 +74,7 @@ class MainController: UIViewController {
         self.view = MaxView(frame: UIScreen.main.bounds)
         
         view.addSubview(mainStack)
-        NSLayoutConstraint.activate(mainStack.getConstraintsOfView(to: view, withInsets: UIEdgeInsets(top: 80, left: 20, bottom: 20, right: -20)))
+        NSLayoutConstraint.activate(mainStack.getConstraintsOfView(to: view, withInsets: UIEdgeInsets(top: 80, left: 30, bottom: 20, right: -30)))
 
         topStack.addArrangedSubview(percentView)
 //        topStack.addArrangedSubview(UIView())
@@ -95,10 +97,10 @@ class MainController: UIViewController {
         NSLayoutConstraint.activate([
             minusButton.widthAnchor.constraint(equalTo: percentView.widthAnchor),
             plusButton.widthAnchor.constraint(equalTo: percentView.widthAnchor),
-            plusButton.heightAnchor.constraint(equalToConstant: 50),
-            minusButton.heightAnchor.constraint(equalToConstant: 50),
-            percentView.widthAnchor.constraint(equalTo: mainStack.widthAnchor, multiplier: 0.5),
-            percentView.heightAnchor.constraint(equalTo: percentView.widthAnchor),
+            plusButton.heightAnchor.constraint(equalToConstant: 35),
+            minusButton.heightAnchor.constraint(equalToConstant: 35),
+            percentView.widthAnchor.constraint(equalTo: mainStack.widthAnchor, multiplier: 0.5, constant: -10),
+            percentView.heightAnchor.constraint(greaterThanOrEqualTo: percentView.widthAnchor, constant: 50),
             gradeView.widthAnchor.constraint(equalTo: percentView.widthAnchor),
             gradeView.heightAnchor.constraint(equalTo: percentView.heightAnchor),
      

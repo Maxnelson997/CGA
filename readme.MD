@@ -16,7 +16,7 @@
 
 - [x] add gesture recognizer to dismiss keyboard when user taps screen while textfield is focused
 
-- [ ] add ability to add a category
+- [x] add ability to add a category
 
 - [ ] add ability to remove a category
 

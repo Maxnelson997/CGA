@@ -96,7 +96,7 @@ class CatCell:UITableViewCell {
         s.layer.masksToBounds = true
         return s
     }()
-
+  
     let container:UIView = {
         let v = UIView()
         v.translatesAutoresizingMaskIntoConstraints = false
@@ -104,7 +104,7 @@ class CatCell:UITableViewCell {
         v.layer.masksToBounds = true
         return v
     }()
-    
+            let space = UIView()
     override func awakeFromNib() {
         self.backgroundColor = .clear
         container.backgroundColor = UIColor.cellColor
@@ -112,20 +112,24 @@ class CatCell:UITableViewCell {
         container.addSubview(stack)
         NSLayoutConstraint.activate(container.getConstraintsOfView(to: self.contentView, withInsets: UIEdgeInsets(top: 10, left: 0, bottom: -10, right: 0)))
         NSLayoutConstraint.activate(stack.getConstraintsOfView(to: container))
-        
+
+        space.translatesAutoresizingMaskIntoConstraints = false
+        stack.addArrangedSubview(space)
         stack.addArrangedSubview(cat)
         stack.addArrangedSubview(earnedBox)
         stack.addArrangedSubview(totalBox)
         
         NSLayoutConstraint.activate([
-            cat.widthAnchor.constraint(equalTo: stack.widthAnchor, multiplier: 1/3),
-            earnedBox.widthAnchor.constraint(equalTo: cat.widthAnchor),
-            totalBox.widthAnchor.constraint(equalTo: cat.widthAnchor)
+            space.widthAnchor.constraint(equalToConstant: 5),
+            cat.widthAnchor.constraint(lessThanOrEqualTo: stack.widthAnchor, multiplier: 1/3),
+            earnedBox.widthAnchor.constraint(equalTo: stack.widthAnchor, multiplier: 1/3),
+            totalBox.widthAnchor.constraint(equalTo: stack.widthAnchor, multiplier: 1/3)
             ])
         
     }
     
     override func prepareForReuse() {
+        stack.removeArrangedSubview(space)
         stack.removeArrangedSubview(cat)
         stack.removeArrangedSubview(earnedBox)
         stack.removeArrangedSubview(totalBox)
@@ -164,28 +168,89 @@ extension MainController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
+
+
+
 class MainController: UIViewController, UITextFieldDelegate {
+
+
+    var new_class_view:NewClassView = {
+        let p = NewClassView()
+
+        p.backgroundColor = UIColor.clear
+        return p
+    }()
+    var new_class_cons:[NSLayoutConstraint]!
+    
+    @objc func add_class() {
+        new_class_cons = new_class_view.getConstraintsOfView(to: catsContainer, withInsets: UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0))
+        catsContainer.addSubview(new_class_view)
+        NSLayoutConstraint.activate(new_class_cons)
+        
+        tb.alpha = 0
+        
+        minusButton.gestureRecognizers?.removeAll()
+        plusButton.gestureRecognizers?.removeAll()
+        
+        minusButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.cancelAddingClass)))
+        plusButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.completeAddingClass)))
+        
+        
+        minusButton.text = "cancel"
+        plusButton.text = "add class"
+    }
+    
+    @objc func cancelAddingClass() {
+        minusButton.text = "-"
+        plusButton.text = "+"
+        new_class_view.removeFromSuperview()
+        minusButton.gestureRecognizers?.removeAll()
+        plusButton.gestureRecognizers?.removeAll()
+        plusButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.add_class)))
+        tb.alpha = 1
+    }
+    
+    @objc func completeAddingClass() {
+  
+        
+        if new_class_view.formFilled {
+            cancelAddingClass()
+            let newClass = classModel(name: new_class_view.type_name, earned: new_class_view.selected_earned_percentage, total: new_class_view.selected_percentage_oftotal)
+            model.classes.append(newClass)
+            tb.reloadData()
+            //success
+        } else {
+            //cmon bill, pls fill the damn form out.
+        }
+    
+
+    }
+    
     var currentField:UITextField = UITextField()
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         view.animateView(direction: .up, distance: 150)
-        dismissButton.alpha = 1
+//        dismissButton.alpha = 0.01
+        dismissButton.isEnabled = true
         currentField = textField
     }
     
     @objc func dismissField() {
         currentField.resignFirstResponder()
-        view.animateView(direction: .up, distance: -150)
-        dismissButton.alpha = 0
+        view.animateView(direction: .down, distance: 0)
+//        dismissButton.alpha = 0
+        dismissButton.isEnabled = false
     }
     
     let model = GPModel.sharedInstance
 
     var dismissButton:UIButton = {
         let n = UIButton()
-        n.backgroundColor = UIColor.cellColor.withAlphaComponent(0.54)
+//        n.backgroundColor = UIColor.cellColor.withAlphaComponent(0.54)
+        n.backgroundColor = .clear
+        n.isEnabled = false
         n.translatesAutoresizingMaskIntoConstraints = false
-        n.alpha = 0
+        n.alpha = 1
         return n
     }()
     
@@ -258,7 +323,7 @@ class MainController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view = MaxView(frame: UIScreen.main.bounds)
-        
+        plusButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.add_class)))
         view.addSubview(mainStack)
         NSLayoutConstraint.activate(mainStack.getConstraintsOfView(to: view, withInsets: UIEdgeInsets(top: 80, left: 30, bottom: 20, right: -30)))
 

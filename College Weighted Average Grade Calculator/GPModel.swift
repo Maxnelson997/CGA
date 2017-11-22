@@ -23,9 +23,22 @@ extension UIView {
     
 }
 
+struct classModel {
+    var name:String!
+    var earned:String!
+    var total:String!
+}
+
 class GPModel {
     static let sharedInstance = GPModel()
     private init() {}
+    
+    
+    var classes:[classModel] = [
+        classModel(name: "Tests", earned: "74%", total: "60%"),
+        classModel(name: "Quiz", earned: "56%", total: "25%"),
+        classModel(name: "Homework", earned: "32%", total: "15%")
+    ]
 
     var class_is_being_edited:Bool = false
     var class_being_edited:Int = 0

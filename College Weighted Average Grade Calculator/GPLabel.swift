@@ -9,7 +9,6 @@
 import UIKit
 
 class GPLabel: UILabel {
-    //this is a change from the other deal
 
     var withOutDraw:Bool = false
     
@@ -24,8 +23,7 @@ class GPLabel: UILabel {
         super.init(frame: frame)
         phaseTwo()
     }
-    
-    //hmm my local changes
+
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

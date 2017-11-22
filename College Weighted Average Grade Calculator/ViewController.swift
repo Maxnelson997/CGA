@@ -8,11 +8,165 @@
 
 import UIKit
 
+class TBHeader:UIStackView {
+    
+    let cat:GPLabel = {
+        let n =  GPLabel()
+        n.text = "category"
+        n.textAlignment = .center
+        return n
+    }()
+    
+    let earned:GPLabel = {
+        let n =  GPLabel()
+        n.text = "earned %"
+        n.textAlignment = .center
+        return n
+    }()
+    
+    let total:GPLabel = {
+        let n =  GPLabel()
+        n.text = "$ of total"
+        n.textAlignment = .center
+        return n
+    }()
 
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        phaseTwo()
+    }
+    
+    init() {
+        super.init(frame: .zero)
+        self.translatesAutoresizingMaskIntoConstraints = false
+        phaseTwo()
+    }
+    
+    required init(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func phaseTwo() {
+        self.addArrangedSubview(cat)
+        self.addArrangedSubview(earned)
+        self.addArrangedSubview(total)
+        self.axis = .horizontal
+        NSLayoutConstraint.activate([cat.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/3), earned.widthAnchor.constraint(equalTo: earned.widthAnchor), total.widthAnchor.constraint(equalTo: cat.widthAnchor)])
+    }
+}
 
+class CatCell:UITableViewCell {
 
+    
+    let cat:GPLabel = {
+        let n =  GPLabel()
+        n.text = "category"
+        n.textAlignment = .left
+        n.backgroundColor = .clear
+        n.textColor = UIColor.white
+        return n
+    }()
+    
+    let earnedBox:UITextField = {
+        let t = UITextField()
+        t.font = UIFont.init(customFont: .MavenProBold, withSize: 15)
+        t.backgroundColor = .clear
+        t.textAlignment = .center
+        t.textColor = .white
+        return t
+    }()
+    
+    let totalBox:UITextField = {
+        let t = UITextField()
+        t.font = UIFont.init(customFont: .MavenProBold, withSize: 15)
+        t.backgroundColor = .clear
+        t.textAlignment = .center
+        t.textColor = .white
+
+        return t
+    }()
+    
+    let stack:UIStackView = {
+       let s = UIStackView()
+        s.translatesAutoresizingMaskIntoConstraints = false
+        s.axis = .horizontal
+//        s.backgroundColor = .clear
+        s.layer.cornerRadius = 6
+        s.layer.masksToBounds = true
+        return s
+    }()
+
+    let container:UIView = UIView()
+    override func awakeFromNib() {
+        self.backgroundColor = .clear
+        container.backgroundColor = UIColor.cellColor
+        contentView.addSubview(container)
+        container.translatesAutoresizingMaskIntoConstraints = false
+        container.addSubview(stack)
+        NSLayoutConstraint.activate(container.getConstraintsOfView(to: self.contentView, withInsets: UIEdgeInsets(top: 10, left: 0, bottom: -10, right: 0)))
+        NSLayoutConstraint.activate(stack.getConstraintsOfView(to: container))
+        
+        stack.addArrangedSubview(cat)
+        stack.addArrangedSubview(earnedBox)
+        stack.addArrangedSubview(totalBox)
+        
+        NSLayoutConstraint.activate([
+            cat.widthAnchor.constraint(equalTo: stack.widthAnchor, multiplier: 1/3),
+            earnedBox.widthAnchor.constraint(equalTo: cat.widthAnchor),
+            totalBox.widthAnchor.constraint(equalTo: cat.widthAnchor)
+            ])
+        
+    }
+    
+    override func prepareForReuse() {
+        stack.removeArrangedSubview(cat)
+        stack.removeArrangedSubview(earnedBox)
+        stack.removeArrangedSubview(totalBox)
+        stack.removeFromSuperview()
+    }
+    
+}
+
+extension MainController: UITableViewDelegate, UITableViewDataSource {
+    //datasource
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return model.classes.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CatCell", for: indexPath) as! CatCell
+        cell.awakeFromNib()
+        cell.cat.text = model.classes[indexPath.item].name
+        cell.earnedBox.text = model.classes[indexPath.item].earned
+        cell.totalBox.text = model.classes[indexPath.item].total
+        cell.selectionStyle = .none
+        return cell
+    }
+    
+    //delegate
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+    }
+    
+    
+}
 
 class MainController: UIViewController {
+    
+    let model = GPModel.sharedInstance
+
+    var tb:UITableView = {
+        let t = UITableView(frame: .zero)
+        t.translatesAutoresizingMaskIntoConstraints = false
+        t.backgroundColor = .clear
+        t.separatorColor = .clear
+        t.separatorStyle = .none
+        t.register(CatCell.self, forCellReuseIdentifier: "CatCell")
+        return t
+    }()
 
     var percentView:TitleView = {
         let m = TitleView(title: "Percent", viewRadius: 20, containsCenterLabel: true, centerText: "81%")
@@ -94,6 +248,11 @@ class MainController: UIViewController {
         mainStack.addArrangedSubview(controlStack)
         mainStack.addArrangedSubview(spacer1)
         
+        catsContainer.addSubview(tb)
+        NSLayoutConstraint.activate(tb.getConstraintsOfView(to: catsContainer, withInsets: UIEdgeInsets(top: 60, left: 10, bottom: -5, right: -10)))
+        
+        tb.delegate = self
+        tb.dataSource = self
         
         NSLayoutConstraint.activate([
             minusButton.widthAnchor.constraint(equalTo: percentView.widthAnchor),

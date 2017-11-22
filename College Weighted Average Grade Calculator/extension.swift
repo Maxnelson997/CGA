@@ -7,7 +7,27 @@
 //
 
 import UIKit
-
+class StackView: UIStackView {
+    private var color: UIColor?
+    override var backgroundColor: UIColor? {
+        get { return color }
+        set {
+            color = newValue
+            self.setNeedsLayout() // EDIT 2017-02-03 thank you @BruceLiu
+        }
+    }
+    
+    private lazy var backgroundLayer: CAShapeLayer = {
+        let layer = CAShapeLayer()
+        self.layer.insertSublayer(layer, at: 0)
+        return layer
+    }()
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        backgroundLayer.path = UIBezierPath(rect: self.bounds).cgPath
+        backgroundLayer.fillColor = self.backgroundColor?.cgColor
+    }
+}
 enum CustomFont: String {
     case MavenProRegular = "MavenPro-Regular"
     case MavenProBlack = "MavenPro-Black"
@@ -24,6 +44,7 @@ extension UIFont {
 extension UIColor {
     open class var topBloo: UIColor { return UIColor.init(rgb: 0xDDFAFF) }
     open class var bottomBloo: UIColor { return UIColor.init(rgb: 0xDBEEFF) }
+    open class var cellColor: UIColor { return UIColor.init(rgb: 0x232020).withAlphaComponent(0.54) }
     
 }
 

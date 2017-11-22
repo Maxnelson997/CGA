@@ -4,8 +4,8 @@
 
 - [x]  add grade label
 
-- [ ] create custom tableview
+- [x] create custom tableview
 
-	- [ ] header contains 3 labels
+	- [x] header contains 3 labels
 
-	- [ ] cell contains 1 label and 2 textfields
+	- [x] cell contains 1 label and 2 textfields

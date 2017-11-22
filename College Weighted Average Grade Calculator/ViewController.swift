@@ -45,13 +45,7 @@ class TBHeader:UIStackView {
         super.init(frame: frame)
         phaseTwo()
     }
-    
-    init() {
-        super.init(frame: .zero)
-        self.translatesAutoresizingMaskIntoConstraints = false
-        phaseTwo()
-    }
-    
+
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -256,6 +250,13 @@ extension MainController: UITableViewDelegate, UITableViewDataSource, DeleteProt
         return 50
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 60
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return TBHeader(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 60))
+    }
     
 }
 

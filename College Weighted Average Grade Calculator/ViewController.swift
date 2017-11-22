@@ -119,6 +119,7 @@ class CatCell:UITableViewCell {
         b.backgroundColor = .clear
         b.setFAIcon(icon: FAType.FARemove, forState: .normal)
         b.setFATitleColor(color: .orange)
+        b.alpha = 0
         return b
     }()
  
@@ -126,6 +127,8 @@ class CatCell:UITableViewCell {
     var exists:Bool = false
     var rwidth:NSLayoutConstraint!
     var rwidth1:NSLayoutConstraint!
+    var rwidth2:NSLayoutConstraint!
+    var rwidth3:NSLayoutConstraint!
     override func awakeFromNib() {
 
         if !exists {
@@ -146,16 +149,17 @@ class CatCell:UITableViewCell {
             stack.addArrangedSubview(totalBox)
             
             rwidth = removeButton.widthAnchor.constraint(equalToConstant: 5)
-            rwidth1 = cat.widthAnchor.constraint(lessThanOrEqualTo: stack.widthAnchor, multiplier: 1/3)
+            rwidth1 = cat.widthAnchor.constraint(equalTo: stack.widthAnchor, multiplier: 1/3)
+            rwidth2 = earnedBox.widthAnchor.constraint(equalTo: stack.widthAnchor, multiplier: 1/3, constant: -5)
+            rwidth3 = totalBox.widthAnchor.constraint(equalTo: stack.widthAnchor, multiplier: 1/3)
             
             
             
             NSLayoutConstraint.activate([
                 rwidth,
                 rwidth1,
-                earnedBox.widthAnchor.constraint(lessThanOrEqualTo: stack.widthAnchor, multiplier: 1/3),
-                totalBox.widthAnchor.constraint(equalTo: stack.widthAnchor, multiplier: 1/3)
-                
+                rwidth2,
+                rwidth3
                 ])
             
             removeButton.addTarget(self, action: #selector(self.removeCategoryFromTB), for: .touchUpInside)
@@ -163,14 +167,15 @@ class CatCell:UITableViewCell {
         } else {
             if removingClass {
                 removeButton.alpha = 1
-                rwidth.constant = 45
-                rwidth1.constant = -45
+                rwidth.constant = 40
+                rwidth2.constant = -40/2
+                rwidth3.constant = -40/2
                 
-
             } else {
                 removeButton.alpha = 0
                 rwidth.constant = 5
-                rwidth1.constant = 0
+                rwidth2.constant = -5
+                rwidth3.constant = 0
             }
             
             UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: [], animations: {
@@ -183,7 +188,7 @@ class CatCell:UITableViewCell {
     
     @objc func removeCategoryFromTB() {
         GPModel.sharedInstance.classes.remove(at: removeButton.tag)
-//        deli.ReloadTB()
+        deli.ReloadTB()
     }
     
     override func prepareForReuse() {
@@ -201,7 +206,7 @@ extension MainController: UITableViewDelegate, UITableViewDataSource, DeleteProt
     
     //deleteprotocol
     func ReloadTB() {
-        removingClass = false
+    
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
             self.tb.reloadData()
         }
@@ -226,7 +231,7 @@ extension MainController: UITableViewDelegate, UITableViewDataSource, DeleteProt
         cell.earnedBox.delegate = self
         cell.totalBox.delegate = self
         cell.deli = self
-
+        cell.removeButton.tag = indexPath.item
 
         cell.selectionStyle = .none
         return cell

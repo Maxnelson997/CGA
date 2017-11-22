@@ -13,15 +13,15 @@ import UIKit
 
 
 class MainController: UIViewController {
-    
+
     var percentView:TitleView = {
-        let m = TitleView(title: "Percent", viewRadius: 20)
+        let m = TitleView(title: "Percent", viewRadius: 20, containsCenterLabel: true, centerText: "81%")
 
         return m
     }()
     
     var gradeView:TitleView = {
-        let m = TitleView(title: "Grade", viewRadius: 20)
+        let m = TitleView(title: "Grade", viewRadius: 20, containsCenterLabel: true, centerText: "B-")
         return m
     }()
     

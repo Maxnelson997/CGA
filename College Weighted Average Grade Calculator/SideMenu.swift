@@ -17,13 +17,13 @@ class IconCell:UITableViewCell {
         b.backgroundColor = UIColor.boxBottom
         b.layer.masksToBounds = true
         b.layer.cornerRadius = 15
+        b.isUserInteractionEnabled = false
         return b
     }()
 
     var icon:FAType!
     
     override func awakeFromNib() {
-
         contentView.addSubview(iconView)
         iconView.setFAIcon(icon: icon, iconSize: 35, forState: .normal)
         iconView.setFATitleColor(color: UIColor.boxTitleColor)
@@ -56,6 +56,7 @@ extension SideMenu: UITableViewDelegate, UITableViewDataSource {
         cell.awakeFromNib()
         cell.selectionStyle = .none
         cell.backgroundColor = .clear
+        cell.isUserInteractionEnabled = false
         return cell
     }
     
@@ -75,7 +76,14 @@ class SideMenu: UIView {
         .FAWPExplorer,
         .FAGrav,
         .FAMeetup,
-        .FAMicrochip
+        .FAMicrochip,
+        .FAGithub,
+        .FASend,
+        .FAUniversalAccess,
+        .FAShoppingCart,
+        .FAStackOverflow,
+        .FASignOut
+        
     ]
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -137,7 +145,8 @@ class SideMenu: UIView {
     func setup() {
         wid = self.widthAnchor.constraint(equalToConstant: 1)
         tbwid = tb.widthAnchor.constraint(equalToConstant: 1)
-
+        tb.isScrollEnabled = true
+        tb.isUserInteractionEnabled = true
 //        self.backgroundColor = UIColor.bgTop
         self.addSubview(bg)
         self.addSubview(label)
@@ -179,7 +188,7 @@ class SideMenu: UIView {
             alph = 1
             distance = 80
             tbwid.constant = 80
-            anim = 0.5
+            anim = 0.4
         } else {
             wid.constant = 1
             alph = 0
@@ -195,7 +204,7 @@ class SideMenu: UIView {
 //        UIView.animate(withDuration: anim, delay: 0, usingSpringWithDamping: 3, initialSpringVelocity: 5, options: .curveEaseOut, animations: {
    
 //        }, completion: nil)
-        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 3, initialSpringVelocity: 5, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 3, initialSpringVelocity: 8, options: .curveEaseOut, animations: {
             self.window?.layoutIfNeeded()
             self.v?.transform = CGAffineTransform(translationX: self.distance, y: 0)
 

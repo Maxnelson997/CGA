@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "College Weighted Average Grade Calculator/ViewController.swift"
-            timestampString = "533107292.254349"
+            timestampString = "533111366.060992"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "223"
-            endingLineNumber = "223"
+            startingLineNumber = "224"
+            endingLineNumber = "224"
             landmarkName = "ReloadTB()"
             landmarkType = "7">
          </BreakpointContent>

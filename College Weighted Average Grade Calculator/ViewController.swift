@@ -128,7 +128,8 @@ class CatCell:UITableViewCell {
         b.translatesAutoresizingMaskIntoConstraints = false
         b.backgroundColor = .clear
         b.setFAIcon(icon: FAType.FARemove, forState: .normal)
-        b.setFATitleColor(color: .orange)
+//        b.setFATitleColor(color: .orange)
+        
         b.alpha = 0
         return b
     }()
@@ -140,7 +141,7 @@ class CatCell:UITableViewCell {
     var rwidth2:NSLayoutConstraint!
     var rwidth3:NSLayoutConstraint!
     override func awakeFromNib() {
-
+        removeButton.setFATitleColor(color: UIColor.init(red: Int(arc4random_uniform(255)), green: Int(arc4random_uniform(255)), blue: Int(arc4random_uniform(255))))
         if !exists {
             exists = true
             self.backgroundColor = .clear

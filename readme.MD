@@ -32,9 +32,9 @@
 	
 ## Next Objectives 
 
-- [ ] Implement Theme Button and Functionality of Theme Button
+- [x] Implement Theme Button and Functionality of Theme Button
 
-- [ ] Implememnt Side Menu and Functionality of Side Menu
+- [x] Implememnt Side Menu and Functionality of Side Menu
 
 - [ ] Add Font Awesome to plus and minus buttons
 

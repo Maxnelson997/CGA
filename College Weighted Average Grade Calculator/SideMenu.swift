@@ -129,6 +129,8 @@ class SideMenu: UIView {
         bg = MaxView()
         bg.translatesAutoresizingMaskIntoConstraints = false
         self.insertSubview(bg, at: 0)
+        bg.isUserInteractionEnabled = false
+        
         NSLayoutConstraint.activate(bg.getConstraintsOfView(to: self))
     }
     
@@ -144,14 +146,14 @@ class SideMenu: UIView {
     
     func setup() {
         wid = self.widthAnchor.constraint(equalToConstant: 1)
-        tbwid = tb.widthAnchor.constraint(equalToConstant: 1)
-        tb.isScrollEnabled = true
-        tb.isUserInteractionEnabled = true
+        tbwid = tb.widthAnchor.constraint(equalToConstant: 80)
+       
 //        self.backgroundColor = UIColor.bgTop
         self.addSubview(bg)
+        
         self.addSubview(label)
-        self.addSubview(tb)
-
+        v?.addSubview(tb)
+        
         label.alpha = 0
         tb.alpha = 0
 
@@ -206,9 +208,13 @@ class SideMenu: UIView {
 //        }, completion: nil)
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 3, initialSpringVelocity: 8, options: .curveEaseOut, animations: {
             self.window?.layoutIfNeeded()
+    
             self.v?.transform = CGAffineTransform(translationX: self.distance, y: 0)
 
-        }, completion: nil)
+        }, completion: { finished in 
+                self.tb.reloadData()
+            
+        })
     }
 
 

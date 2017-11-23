@@ -277,10 +277,11 @@ extension MainController: UITableViewDelegate, UITableViewDataSource, DeleteProt
 
 class MainController: UIViewController, UITextFieldDelegate {
 
+    
 
+    
     var new_class_view:NewClassView = {
         let p = NewClassView()
-
         p.backgroundColor = UIColor.clear
         return p
     }()
@@ -463,8 +464,7 @@ class MainController: UIViewController, UITextFieldDelegate {
         
         return s
     }()
-    
-    
+
 
     override func viewDidLoad() {
         super.viewDidLoad()

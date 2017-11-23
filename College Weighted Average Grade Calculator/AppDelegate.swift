@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Font_Awesome_Swift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,8 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var navigationController:UINavigationController!
 
-    var main_controller:UIViewController!
-    
+    var main_controller:MainController!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -26,16 +26,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         navigationController = UINavigationController()
         main_controller = MainController()
+        main_controller.navigationItem.leftBarButtonItem = BarButton(withIcon: FAType.FAMoonO, withSelector: #selector(self.ChangeTheme))
         navigationController.viewControllers = [main_controller]
-        
     
         window!.rootViewController = navigationController
         window!.makeKeyAndVisible()
-        
-        
-    
+ 
         return true
     }
+    
+    @objc func ChangeTheme() {
+        GPModel.sharedInstance.dtheme = !GPModel.sharedInstance.dtheme
+        main_controller = MainController()
+        navigationController.viewControllers = [main_controller]
+        (main_controller.view as! MaxView).transitionTheme()
+        if GPModel.sharedInstance.dtheme {
+             main_controller.navigationItem.leftBarButtonItem = BarButton(withIcon: FAType.FAMoonO, withSelector: #selector(self.ChangeTheme))
+            return
+        }
+        main_controller.navigationItem.leftBarButtonItem = BarButton(withIcon: FAType.FAMoonO, withSelector: #selector(self.ChangeTheme))
+    }
+    
+    func BarButton(withIcon: FAType, withSelector: Selector) -> UIBarButtonItem {
+        let b = UIButton(type: .custom)
+        if GPModel.sharedInstance.dtheme { b.setFATitleColor(color: .darkGray) } else { b.setFATitleColor(color: .darkGray) }
+        b.setFAIcon(icon: withIcon, iconSize: 30, forState: UIControlState.normal)
+        b.contentHorizontalAlignment = .left
+        b.frame = CGRect(x: 0, y: 0, width: 30, height: 0)
+        b.addTarget(self, action: withSelector, for: .touchUpInside)
+        return UIBarButtonItem(customView: b)
+    }
+    
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

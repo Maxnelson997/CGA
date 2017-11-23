@@ -22,41 +22,48 @@ class TBHeader:UIStackView {
     
     let cat:GPLabel = {
         let n =  GPLabel()
+        n.adjustsFontSizeToFitWidth = false
         n.text = "category"
+        n.textColor = UIColor.headerText
         n.textAlignment = .center
+        n.font = UIFont.init(customFont: .MavenProBold, withSize: 13)
         return n
     }()
     
     let earned:GPLabel = {
         let n =  GPLabel()
-        n.text = "earned %"
+        n.adjustsFontSizeToFitWidth = false
+        n.text = "grade %"
+        n.textColor = UIColor.headerText
         n.textAlignment = .center
+        n.font = UIFont.init(customFont: .MavenProBold, withSize: 13)
         return n
     }()
     
     let total:GPLabel = {
         let n =  GPLabel()
-        n.text = "$ of total"
+        n.adjustsFontSizeToFitWidth = false
+        n.text = "weight %"
+        n.textColor = UIColor.headerText
         n.textAlignment = .center
+        n.font = UIFont.init(customFont: .MavenProBold, withSize: 13)
         return n
     }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        phaseTwo()
-    }
-
-    required init(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func phaseTwo() {
+        
         self.addArrangedSubview(cat)
         self.addArrangedSubview(earned)
         self.addArrangedSubview(total)
         self.axis = .horizontal
         NSLayoutConstraint.activate([cat.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/3), earned.widthAnchor.constraint(equalTo: earned.widthAnchor), total.widthAnchor.constraint(equalTo: cat.widthAnchor)])
     }
+
+    required init(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
 }
 
 protocol DeleteProtocol {
@@ -74,7 +81,7 @@ class CatCell:UITableViewCell {
         n.text = "category"
         n.textAlignment = .left
         n.backgroundColor = .clear
-        n.textColor = UIColor.white
+        n.textColor = UIColor.cellTextColor
         return n
     }()
     
@@ -83,7 +90,7 @@ class CatCell:UITableViewCell {
         t.font = UIFont.init(customFont: .MavenProBold, withSize: 15)
         t.backgroundColor = .clear
         t.textAlignment = .center
-        t.textColor = .white
+        t.textColor = UIColor.cellTextColor
         return t
     }()
     
@@ -92,7 +99,7 @@ class CatCell:UITableViewCell {
         t.font = UIFont.init(customFont: .MavenProBold, withSize: 15)
         t.backgroundColor = .clear
         t.textAlignment = .center
-        t.textColor = .white
+        t.textColor = UIColor.cellTextColor
 
         return t
     }()
@@ -209,7 +216,6 @@ extension MainController: UITableViewDelegate, UITableViewDataSource, DeleteProt
     
     //deleteprotocol
     func ReloadTB() {
-    
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
             self.tb.reloadData {
                 //upon completion of reload, re calculate. wait this aint fkin necessary; the model already updated!
@@ -251,11 +257,17 @@ extension MainController: UITableViewDelegate, UITableViewDataSource, DeleteProt
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 60
+        return 30
     }
 
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return TBHeader(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 60))
+        let header = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 30))
+        header.addSubview(TBHeader(frame: header.frame))
+        header.backgroundColor = UIColor.cellHeaderColor
+        header.layer.cornerRadius = 6
+        header.layer.masksToBounds = true
+        return header
     }
     
 }
@@ -416,14 +428,14 @@ class MainController: UIViewController, UITextFieldDelegate {
     }()
     
     var plusButton:TitleInView = {
-        let m = TitleInView(title: "+", viewRadius: 20)
+        let m = TitleInView(title: "+", viewRadius: 15)
 
         return m
     }()
     
     var minusButton:TitleInView = {
-        let m = TitleInView(title: "-", viewRadius: 20)
-
+        let m = TitleInView(title: "-", viewRadius: 15)
+        
         return m
     }()
     
@@ -521,7 +533,9 @@ class MainController: UIViewController, UITextFieldDelegate {
             //categoriesContainer.addSubview(classCategoriesTable)
         
         
-        
+        let totalPercent = calculate_average()
+        self.percentView.centerLabel.text = String(describing: totalPercent)
+        self.gradeView.centerLabel.text = get_grade_from_average(percent: totalPercent)
         
         
     }

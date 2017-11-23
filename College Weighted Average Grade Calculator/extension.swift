@@ -56,11 +56,31 @@ extension UIFont {
 }
 
 extension UIColor {
-    open class var topBloo1: UIColor { return UIColor.init(rgb: 0xDDFAFF) }
-    open class var bottomBloo: UIColor { return UIColor.init(rgb: 0xFFFFFF) }
-//        open class var bottomBloo: UIColor { return UIColor.init(rgb: 0xDBEEFF) }
-    open class var cellColor: UIColor { return UIColor.init(rgb: 0x232020).withAlphaComponent(0.54) }
-    open class var topBloo: UIColor { return UIColor.init(rgb: 0x3DD2FF/*0x9BE8FF*/) }
+//    open class var topBloo1: UIColor { return UIColor.init(rgb: 0xDDFAFF) }
+//    open class var bottomBloo: UIColor { return UIColor.init(rgb: 0xFFFFFF) }
+//    open class var bottomBloo: UIColor { return UIColor.init(rgb: 0xDBEEFF) }
+    
+    open class var headerColor: UIColor {  if GPModel.sharedInstance.dtheme { return UIColor.init(rgb: 0x3DD2FF/*0x9BE8FF*/) } ; return .black }
+    open class var headerText: UIColor { if GPModel.sharedInstance.dtheme { return UIColor.darkGray } ; return .black }
+//    open class var bgTop:UIColor { return UIColor.init(rgb: 0xDDFAFF ) }
+//    open class var bgBottom:UIColor { return UIColor.init(rgb: 0x00D9FF ) }
+    open class var bgTop:UIColor { if GPModel.sharedInstance.dtheme { return UIColor.init(rgb: 0xDDFAFF ) } ; return UIColor.darkGray.withAlphaComponent(1) }
+    open class var bgBottom:UIColor { if GPModel.sharedInstance.dtheme { return UIColor.init(rgb: 0x00D9FF ) } ; return UIColor.darkGray.withAlphaComponent(0.5)
+    }
+    
+    open class var boxTop:UIColor { if GPModel.sharedInstance.dtheme { return UIColor.white.withAlphaComponent(0.9) } ; return UIColor.white.withAlphaComponent(0.9) }
+    open class var boxBottom:UIColor { if GPModel.sharedInstance.dtheme { return UIColor.white.withAlphaComponent(0.8)} ; return UIColor.init(rgb: 0xDDFAFF) }
+    open class var boxTextColor:UIColor { if GPModel.sharedInstance.dtheme { return UIColor.darkGray } ; return .darkGray }
+    open class var boxTitleColor:UIColor { if GPModel.sharedInstance.dtheme { return UIColor.darkGray } ; return UIColor.init(rgb: 0x00D9FF)  }
+    open class var boxShadowColor:UIColor { if GPModel.sharedInstance.dtheme { return UIColor.darkGray } ; return UIColor.gray.withAlphaComponent(0.2) }
+    
+    open class var cellTextColor:UIColor { if GPModel.sharedInstance.dtheme { return UIColor.init(rgb: 0xFFFFFF) } ; return .white }
+    open class var cellColor:UIColor { if GPModel.sharedInstance.dtheme { return UIColor.init(rgb: 0x232020).withAlphaComponent(0.54) } ; return UIColor.init(rgb: 0x232020).withAlphaComponent(0.54)  }
+    
+    open class var cellHeaderColor:UIColor { if GPModel.sharedInstance.dtheme { return UIColor.init(rgb: 0x232020).withAlphaComponent(0.54).withAlphaComponent(0.3) } ; return UIColor.init(rgb: 0x00D9FF)  }
+
+    
+    
 }
 
 extension UIColor {
@@ -84,7 +104,7 @@ extension UIColor {
 extension UIView {
     func addDropShadowToView(){
         self.layer.masksToBounds =  false
-        self.layer.shadowColor = UIColor.darkGray.cgColor;
+        self.layer.shadowColor = UIColor.boxShadowColor.cgColor
         self.layer.shadowOffset = CGSize(width: 8.0, height: 11.0)
         self.layer.shadowOpacity = 0.8
         self.layer.shadowRadius = 5

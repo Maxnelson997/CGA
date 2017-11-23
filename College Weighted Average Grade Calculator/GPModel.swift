@@ -33,6 +33,7 @@ class GPModel {
     static let sharedInstance = GPModel()
     private init() {}
     
+    var dtheme:Bool = false
     
     var classes:[classModel] = [
         classModel(name: "Tests", earned: "74%", total: "60%"),

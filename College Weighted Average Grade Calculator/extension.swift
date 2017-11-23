@@ -60,7 +60,9 @@ extension UIColor {
 //    open class var bottomBloo: UIColor { return UIColor.init(rgb: 0xFFFFFF) }
 //    open class var bottomBloo: UIColor { return UIColor.init(rgb: 0xDBEEFF) }
     
-    open class var headerColor: UIColor {  if !GPModel.sharedInstance.dtheme { return UIColor.init(rgb: 0x3DD2FF/*0x9BE8FF*/) } ; return .black }
+
+    
+    open class var headerColor: UIColor {  if !GPModel.sharedInstance.dtheme { return UIColor.init(rgb: 0xDDFAFF/*0x9BE8FF*/) } ; return UIColor.init(rgb: 0x00D9FF) }
     open class var headerText: UIColor { if !GPModel.sharedInstance.dtheme { return UIColor.darkGray } ; return .black }
 //    open class var bgTop:UIColor { return UIColor.init(rgb: 0xDDFAFF ) }
 //    open class var bgBottom:UIColor { return UIColor.init(rgb: 0x00D9FF ) }
@@ -71,7 +73,7 @@ extension UIColor {
     open class var boxTop:UIColor { if !GPModel.sharedInstance.dtheme { return UIColor.white.withAlphaComponent(0.9) } ; return UIColor.white.withAlphaComponent(0.9) }
     open class var boxBottom:UIColor { if !GPModel.sharedInstance.dtheme { return UIColor.white.withAlphaComponent(0.8)} ; return UIColor.init(rgb: 0xDDFAFF) }
     open class var boxTextColor:UIColor { if !GPModel.sharedInstance.dtheme { return UIColor.darkGray } ; return .darkGray }
-    open class var boxTitleColor:UIColor { if !GPModel.sharedInstance.dtheme { return UIColor.darkGray } ; return UIColor.init(rgb: 0x00D9FF)  }
+    open class var boxTitleColor:UIColor { if !GPModel.sharedInstance.dtheme { return UIColor.darkGray } ; return .white  } //0x00D9FF bloo
     open class var boxShadowColor:UIColor { if !GPModel.sharedInstance.dtheme { return UIColor.darkGray } ; return UIColor.gray.withAlphaComponent(0.2) }
     
     open class var cellTextColor:UIColor { if !GPModel.sharedInstance.dtheme { return UIColor.init(rgb: 0xFFFFFF) } ; return .white }

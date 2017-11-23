@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import Font_Awesome_Swift
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -18,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var navigationController:UINavigationController!
 
     var main_controller:MainController!
+    var menu:SideMenu!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -26,25 +28,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         navigationController = UINavigationController()
         main_controller = MainController()
-        main_controller.navigationItem.leftBarButtonItem = BarButton(withIcon: FAType.FAMoonO, withSelector: #selector(self.ChangeTheme))
+        main_controller.navigationItem.rightBarButtonItem = BarButton(withIcon: FAType.FACircleO, withSelector: #selector(self.ChangeTheme))
+        main_controller.navigationItem.leftBarButtonItem = BarButton(withIcon: FAType.FABars, withSelector: #selector(self.PopSide))
         navigationController.viewControllers = [main_controller]
+        
     
         window!.rootViewController = navigationController
         window!.makeKeyAndVisible()
+        
+        
+        menu = SideMenu()
+        main_controller.view.addSubview(menu)
+        menu.setup()
  
         return true
+    }
+
+    
+    @objc func PopSide() {
+        menu.showMenu()
     }
     
     @objc func ChangeTheme() {
         GPModel.sharedInstance.dtheme = !GPModel.sharedInstance.dtheme
-        main_controller = MainController()
-        navigationController.viewControllers = [main_controller]
-        (main_controller.view as! MaxView).transitionTheme()
+        menu.transitionTheme()
+        main_controller.transitionTheme()
         if GPModel.sharedInstance.dtheme {
-             main_controller.navigationItem.leftBarButtonItem = BarButton(withIcon: FAType.FAMoonO, withSelector: #selector(self.ChangeTheme))
+            main_controller.navigationItem.rightBarButtonItem = BarButton(withIcon: FAType.FACircle, withSelector: #selector(self.ChangeTheme))
             return
         }
-        main_controller.navigationItem.leftBarButtonItem = BarButton(withIcon: FAType.FAMoonO, withSelector: #selector(self.ChangeTheme))
+        main_controller.navigationItem.rightBarButtonItem = BarButton(withIcon: FAType.FACircleO, withSelector: #selector(self.ChangeTheme))
+
     }
     
     func BarButton(withIcon: FAType, withSelector: Selector) -> UIBarButtonItem {
@@ -56,7 +70,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         b.addTarget(self, action: withSelector, for: .touchUpInside)
         return UIBarButtonItem(customView: b)
     }
-    
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

@@ -262,7 +262,7 @@ extension MainController: UITableViewDelegate, UITableViewDataSource, DeleteProt
 
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 30))
+        header = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 30))
         header.addSubview(TBHeader(frame: header.frame))
         header.backgroundColor = UIColor.cellHeaderColor
         header.layer.cornerRadius = 6
@@ -277,8 +277,20 @@ extension MainController: UITableViewDelegate, UITableViewDataSource, DeleteProt
 
 class MainController: UIViewController, UITextFieldDelegate {
 
+    var header:UIView!
     
-
+    func transitionTheme() {
+        
+        mView.removeFromSuperview()
+        mView = MaxView(frame: UIScreen.main.bounds)
+        view.insertSubview(mView, at: 0)
+        catsContainer.label.textColor = UIColor.boxTitleColor
+        gradeView.label.textColor = UIColor.boxTitleColor
+        percentView.label.textColor = UIColor.boxTitleColor
+        header.backgroundColor = UIColor.headerColor
+        
+        
+    }
     
     var new_class_view:NewClassView = {
         let p = NewClassView()
@@ -412,18 +424,18 @@ class MainController: UIViewController, UITextFieldDelegate {
     }()
 
     var percentView:TitleView = {
-        let m = TitleView(title: "Percent", viewRadius: 20, containsCenterLabel: true, centerText: "81%")
+        let m = TitleView(title: "percent", viewRadius: 23, containsCenterLabel: true, centerText: "81%")
 
         return m
     }()
     
     var gradeView:TitleView = {
-        let m = TitleView(title: "Grade", viewRadius: 20, containsCenterLabel: true, centerText: "B-")
+        let m = TitleView(title: "grade", viewRadius: 23, containsCenterLabel: true, centerText: "B-")
         return m
     }()
     
     var catsContainer:TitleView = {
-        let m = TitleView(title: "Class Categories", perfectSquare: false, viewRadius: 20)
+        let m = TitleView(title: "class categories", perfectSquare: false, viewRadius: 23)
     
         return m
     }()
@@ -465,10 +477,12 @@ class MainController: UIViewController, UITextFieldDelegate {
         return s
     }()
 
+    var mView:MaxView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view = MaxView(frame: UIScreen.main.bounds)
+        mView = MaxView(frame: UIScreen.main.bounds)
+        self.view.addSubview(mView)
         plusButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.add_class)))
         minusButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.remove_class)))
         view.addSubview(mainStack)

@@ -21,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var main_controller:MainController!
     var menu:SideMenu!
 
+    
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
@@ -36,12 +38,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.rootViewController = navigationController
         window!.makeKeyAndVisible()
         
+//        let v = UIView()
+//        v.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
+//        v.backgroundColor = .red
+//
+        menu = SideMenu(frame: CGRect(x: 0, y: 0, width: 50, height: (window?.frame.height)!))
+        self.main_controller.view.addSubview(menu)
+//        menu.setup()
+        menu.translatesAutoresizingMaskIntoConstraints = true
+        menu.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.tapppp)))
         
-        menu = SideMenu()
-        main_controller.view.addSubview(menu)
-        menu.setup()
+        
  
         return true
+    }
+    
+    @objc func tapppp() {
+        print("hass been dtappedd")
+    }
+    
+    @objc func yooos() {
+        print("swag swag")
     }
 
     

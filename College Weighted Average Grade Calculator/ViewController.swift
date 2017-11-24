@@ -110,7 +110,7 @@ class CatCell:UITableViewCell {
         s.axis = .horizontal
 //        s.backgroundColor = .clear
         s.layer.cornerRadius = 6
-        s.layer.masksToBounds = true
+//        s.layer.masksToBounds = true
         return s
     }()
   
@@ -118,7 +118,7 @@ class CatCell:UITableViewCell {
         let v = UIView()
         v.translatesAutoresizingMaskIntoConstraints = false
         v.layer.cornerRadius = 6
-        v.layer.masksToBounds = true
+//        v.layer.masksToBounds = true
         return v
     }()
 
@@ -267,7 +267,7 @@ extension MainController: UITableViewDelegate, UITableViewDataSource, DeleteProt
         header.addSubview(TBHeader(frame: header.frame))
         header.backgroundColor = UIColor.cellHeaderColor
         header.layer.cornerRadius = 6
-        header.layer.masksToBounds = true
+//        header.layer.masksToBounds = true
         return header
     }
     
@@ -280,16 +280,18 @@ class MainController: UIViewController, UITextFieldDelegate {
 
     var header:UIView!
     
+    
+
     func transitionTheme() {
-        
-        mView.removeFromSuperview()
+
+//        mView.removeFromSuperview()
         mView = MaxView(frame: UIScreen.main.bounds)
-        view.insertSubview(mView, at: 0)
+//        view.insertSubview(mView, at: 0)
         catsContainer.label.textColor = UIColor.boxTitleColor
         gradeView.label.textColor = UIColor.boxTitleColor
         percentView.label.textColor = UIColor.boxTitleColor
         header.backgroundColor = UIColor.headerColor
-        
+
         
     }
     
@@ -482,7 +484,10 @@ class MainController: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+
         mView = MaxView(frame: UIScreen.main.bounds)
+        mView.isUserInteractionEnabled = false
         self.view.addSubview(mView)
         plusButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.add_class)))
         minusButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.remove_class)))
@@ -551,7 +556,13 @@ class MainController: UIViewController, UITextFieldDelegate {
         let totalPercent = calculate_average()
         self.percentView.centerLabel.text = String(describing: totalPercent)
         self.gradeView.centerLabel.text = get_grade_from_average(percent: totalPercent)
-        
+
+      
+ 
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+                              self.view.transform = CGAffineTransform(translationX: 250, y: 0)
+            print("tan")
+        }
         
     }
 

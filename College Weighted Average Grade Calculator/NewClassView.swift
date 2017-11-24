@@ -40,7 +40,7 @@ class NewClassView: UIStackView, UITextFieldDelegate {
         b.backgroundColor = UIColor.cellColor
         b.isEnabled = false
         b.layer.cornerRadius = 6
-        b.layer.masksToBounds = true
+//        b.layer.masksToBounds = true
         b.translatesAutoresizingMaskIntoConstraints = false
         return b
     }()
@@ -72,7 +72,7 @@ class NewClassView: UIStackView, UITextFieldDelegate {
     fileprivate var type_pick:UIPickerView = {
         let s = UIPickerView()
         s.layer.cornerRadius = 12
-        s.layer.masksToBounds = true
+//        s.layer.masksToBounds = true
         s.translatesAutoresizingMaskIntoConstraints = false
         return s
     }()

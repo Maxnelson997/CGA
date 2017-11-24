@@ -15,19 +15,27 @@ class IconCell:UITableViewCell {
         b.titleLabel?.adjustsFontSizeToFitWidth = true
         b.translatesAutoresizingMaskIntoConstraints = false
         b.backgroundColor = UIColor.boxBottom
-        b.layer.masksToBounds = true
+        b.clipsToBounds = true
+        
         b.layer.cornerRadius = 15
-        b.isUserInteractionEnabled = false
+      
+        
         return b
     }()
+    
+    @objc func wassup() {
+        print("ayy")
+    }
 
     var icon:FAType!
     
     override func awakeFromNib() {
+        self.clipsToBounds = true
         contentView.addSubview(iconView)
         iconView.setFAIcon(icon: icon, iconSize: 35, forState: .normal)
-        iconView.setFATitleColor(color: UIColor.boxTitleColor)
+        iconView.setFATitleColor(color: UIColor.boxTextColor)
 //        NSLayoutConstraint.activate(iconView.getConstraintsOfView(to: contentView, withInsets: UIEdgeInsets(top: 10, left: 33.75, bottom: -10, right: -33.75)))
+        iconView.addTarget(self, action: #selector(self.wassup), for: .touchUpInside)
         NSLayoutConstraint.activate([
             iconView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             iconView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
@@ -41,6 +49,10 @@ class IconCell:UITableViewCell {
 }
 
 extension SideMenu: UITableViewDelegate, UITableViewDataSource {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        print("scrolling")
+    }
     //datasource
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -56,7 +68,7 @@ extension SideMenu: UITableViewDelegate, UITableViewDataSource {
         cell.awakeFromNib()
         cell.selectionStyle = .none
         cell.backgroundColor = .clear
-        cell.isUserInteractionEnabled = false
+ cell.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.hmm)))
         return cell
     }
     
@@ -83,8 +95,8 @@ class SideMenu: UIView {
         .FAShoppingCart,
         .FAStackOverflow,
         .FASignOut
-        
     ]
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         phaseTwo()
@@ -101,7 +113,7 @@ class SideMenu: UIView {
     }
     
     let v = (UIApplication.shared.delegate as! AppDelegate).main_controller.view
-
+    
     var wid:NSLayoutConstraint!
     var tbwid:NSLayoutConstraint!
     
@@ -117,9 +129,21 @@ class SideMenu: UIView {
     
     
     func phaseTwo() {
-
-
+        label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.hmm)))
+        tb.dataSource = self
+        tb.delegate = self
+        bg.translatesAutoresizingMaskIntoConstraints = true
+//        label.translatesAutoresizingMaskIntoConstraints = true
+        tb.translatesAutoresizingMaskIntoConstraints = true
+        tb.frame = self.frame
+        self.addSubview(bg)
+//        self.addSubview(label)
+        self.addSubview(tb)
+        
+        label.alpha = 1
+        tb.alpha = 1
     }
+    
     
     var bg = MaxView()
     
@@ -129,8 +153,6 @@ class SideMenu: UIView {
         bg = MaxView()
         bg.translatesAutoresizingMaskIntoConstraints = false
         self.insertSubview(bg, at: 0)
-        bg.isUserInteractionEnabled = false
-        
         NSLayoutConstraint.activate(bg.getConstraintsOfView(to: self))
     }
     
@@ -141,43 +163,43 @@ class SideMenu: UIView {
         t.separatorColor = .clear
         t.separatorStyle = .none
         t.register(IconCell.self, forCellReuseIdentifier: "IconCell")
+        
         return t
     }()
     
+    @objc func hmm() {
+        print("hmmmmm")
+    }
+    
+    
     func setup() {
-        wid = self.widthAnchor.constraint(equalToConstant: 1)
-        tbwid = tb.widthAnchor.constraint(equalToConstant: 80)
-       
-//        self.backgroundColor = UIColor.bgTop
-        self.addSubview(bg)
-        
-        self.addSubview(label)
-        v?.addSubview(tb)
-        
-        label.alpha = 0
-        tb.alpha = 0
+//
+//        tb.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.hmm)))
+//        wid = self.widthAnchor.constraint(equalToConstant: 80)
+//        tbwid = tb.widthAnchor.constraint(equalToConstant: 80)
+//        label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.hmm)))
+////        self.backgroundColor = UIColor.bgTop
+   
+//        NSLayoutConstraint.activate([
+//            label.topAnchor.constraint(equalTo: (v?.topAnchor)!, constant: 80),
+//            label.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 15),
+//            label.heightAnchor.constraint(equalToConstant: 50),
+//
+//            tb.topAnchor.constraint(equalTo: label.bottomAnchor),
+//            tb.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+//            tbwid,
+//            tb.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+//
+//            ])
+//        bg.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate(bg.getConstraintsOfView(to: self))
+//        NSLayoutConstraint.activate([
+//            self.rightAnchor.constraint(equalTo: (v?.leftAnchor)!),
+//            self.topAnchor.constraint(equalTo: (v?.topAnchor)!),
+//            self.bottomAnchor.constraint(equalTo: (v?.bottomAnchor)!),
+//            wid
+//            ])
 
-        NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: (v?.topAnchor)!, constant: 80),
-            label.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 15),
-            label.heightAnchor.constraint(equalToConstant: 50),
-            
-            tb.topAnchor.constraint(equalTo: label.bottomAnchor),
-            tb.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            tbwid,
-            tb.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            
-            ])
-        bg.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate(bg.getConstraintsOfView(to: self))
-        NSLayoutConstraint.activate([
-            self.rightAnchor.constraint(equalTo: (v?.leftAnchor)!),
-            self.topAnchor.constraint(equalTo: (v?.topAnchor)!),
-            self.bottomAnchor.constraint(equalTo: (v?.bottomAnchor)!),
-            wid
-            ])
-        tb.dataSource = self
-        tb.delegate = self
     }
     
     var alph:CGFloat = 1
@@ -206,15 +228,19 @@ class SideMenu: UIView {
 //        UIView.animate(withDuration: anim, delay: 0, usingSpringWithDamping: 3, initialSpringVelocity: 5, options: .curveEaseOut, animations: {
    
 //        }, completion: nil)
+          self.v?.transform = CGAffineTransform(translationX: self.distance, y: 0)
+
+
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 3, initialSpringVelocity: 8, options: .curveEaseOut, animations: {
-            self.window?.layoutIfNeeded()
+            self.v?.layoutIfNeeded()
     
-            self.v?.transform = CGAffineTransform(translationX: self.distance, y: 0)
+
 
         }, completion: { finished in 
-                self.tb.reloadData()
+            
             
         })
+        
     }
 
 

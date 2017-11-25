@@ -36,24 +36,36 @@
 
 - [x] Implememnt Side Menu and Functionality of Side Menu
 
-- [ ] Add Font Awesome to plus and minus buttons
+- [x] Add Font Awesome to plus and minus buttons
 
-- [ ] Add pop up telling user to finish filling out form
+- [x] Add pop up telling user to finish filling out form
 
-- [ ] Add header to category form
+- [x] Add header to category form
 
-- [ ] make only the category name field animate down instead of whole view
+- [x] make only the category name field animate down instead of whole view
 
-- [ ] put tool bar on keyboard when changing text 
+- [x] put tool bar on keyboard when changing text 
 	
-	- [ ] done button in tool bar
+	- [x] done button in tool bar
+
+- [x] remove suggestions and corrections from textfields	
 	
-- [ ] remove suggestions and corrections from textfields	
-	
-- [ ] in the pickerview for selecting category percent only allow user a max of 100% accross all categories
+- [x] in the pickerview for selecting category percent only allow user a max of 100% accross all categories
 
-- [ ] When editing grade % and weight % force a % sign at the end and only allow up to 3 places ie: 1-99 && 100 
+- [x] When editing grade % and weight % force a % sign at the end and only allow up to 3 places ie: 1-99 && 100 
 
-- [ ] Force a category name 'tests' 
+- [x] Force a category name 'tests' 
 
-- [ ] Disable plus button when user is minusing categories
+- [x] Disable plus button when user is minusing categories
+
+## Final Objectives
+
+- [ ] popup for feedback
+
+- [ ] logo 
+ 
+- [ ] makeappicon
+
+- [ ] launch screen image
+
+- [ ] upload and finalizations on itunes connect

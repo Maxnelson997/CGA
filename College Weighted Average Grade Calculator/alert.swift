@@ -15,15 +15,27 @@ class Alert:UIView {
         phaseTwo()
     }
     
+    var alph:CGFloat = 0.95
     func timerStart() {
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + self.duration) {
+        if self.duration != 0 {
+            print("duration: \(String(describing: self.duration))")
+                self.dismissLabel.animate(toText: String(describing: Int(self.duration)))
+                UIView.animate(withDuration: 1, animations: {
+                    self.alpha = self.alph
+                }, completion: { (true) in
+                    self.duration -= 1.0
+                    if self.alph == 0.95 { self.alph = 1 } else { self.alph = 0.95}
+                    self.timerStart()
+                })
+        } else {
             self.dismissAlert()
         }
+
     }
     
-    var duration:Double!
+    var duration:Double = 3
     
-    init(title:String, message:String, duration:Double = 4) {
+    init(title:String, message:String, duration:Double = 3) {
         super.init(frame: UIScreen.main.bounds)
         self.duration = duration
         self.alertTitle = title
@@ -53,7 +65,7 @@ class Alert:UIView {
         g.backgroundColor = UIColor.clear
         g.textColor = UIColor.white
         g.textAlignment = .center
-        g.text = "ok"
+        g.text = ""
         g.font = UIFont.init(customFont: .MavenProBold, withSize: 20)
         return g
     }()
@@ -80,7 +92,10 @@ class Alert:UIView {
     
     func phaseTwo() {
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.dismissAlert)))
-        self.backgroundColor = UIColor.boxTitleColor.withAlphaComponent(0.9)
+        stack.isUserInteractionEnabled = false
+        dismissLabel.isUserInteractionEnabled = false
+        alertView.isUserInteractionEnabled = false
+        self.backgroundColor = UIColor.darkGray.withAlphaComponent(0.9)
         self.addSubview(stack)
         stack.addArrangedSubview(alertView)
         stack.addArrangedSubview(dismissLabel)

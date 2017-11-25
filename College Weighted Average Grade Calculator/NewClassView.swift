@@ -9,10 +9,10 @@ class NewClassView: UIStackView, UITextFieldDelegate {
         button.isEnabled = true
         
         UIView.animate(withDuration: 0.3) {
-            self.button.alpha = 1
+            self.button.alpha = 0
             self.type_pick.alpha = 0
             self.titleBox.textColor = UIColor.white
-            self.titleBox.attributedPlaceholder = NSAttributedString.init(string: "category name", attributes: [NSAttributedStringKey.foregroundColor:UIColor.white.withAlphaComponent(0.6)])
+            self.titleBox.attributedPlaceholder = NSAttributedString.init(string: "category name", attributes: [NSAttributedStringKey.foregroundColor:UIColor.white.withAlphaComponent(0.3)])
         }
         self.animateView(direction: .down, distance: 20)
         
@@ -23,8 +23,8 @@ class NewClassView: UIStackView, UITextFieldDelegate {
         UIView.animate(withDuration: 0.3) {
             self.button.alpha = 0
             self.type_pick.alpha = 1
-            self.titleBox.textColor = UIColor.cellColor.withAlphaComponent(1)
-            self.titleBox.attributedPlaceholder = NSAttributedString.init(string: "category name", attributes: [NSAttributedStringKey.foregroundColor:UIColor.cellColor.withAlphaComponent(0.6)])
+            self.titleBox.textColor = UIColor.white.withAlphaComponent(1)
+            self.titleBox.attributedPlaceholder = NSAttributedString.init(string: "category name", attributes: [NSAttributedStringKey.foregroundColor:UIColor.cellColor.withAlphaComponent(0.3)])
         }
         button.isEnabled = false
         self.animateView(direction: .up, distance: 0)
@@ -60,10 +60,14 @@ class NewClassView: UIStackView, UITextFieldDelegate {
     
     func updateRemainingPercent() {
         var p:[String] = []
-        for i in 1 ..< get_remaining_percent() { //101
+        let ps = get_remaining_percent()
+        if ps > 0 { isFull = false } else { isFull = true }
+        
+        for i in 1 ..< ps { //101
             p.append(String(describing: i) + "%")
         }
         self.percentages = p
+        phaseTwo()
         self.type_pick.reloadAllComponents()
     }
     
@@ -102,7 +106,28 @@ class NewClassView: UIStackView, UITextFieldDelegate {
     init() {
         super.init(frame: .zero)
         self.translatesAutoresizingMaskIntoConstraints = false
+        donebtn()
         phaseTwo()
+    }
+    
+    func donebtn()
+    {
+        let doneToolbar: UIToolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
+        doneToolbar.barStyle = .default
+        
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let done: UIBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(self.doneButtonAction))
+        
+        let items = [flexSpace, done]
+        doneToolbar.items = items
+        doneToolbar.sizeToFit()
+        
+        titleBox.inputAccessoryView = doneToolbar
+    }
+    
+    @objc func doneButtonAction()
+    {
+        titleBox.resignFirstResponder()
     }
     
     required init(coder: NSCoder) {
@@ -118,11 +143,12 @@ class NewClassView: UIStackView, UITextFieldDelegate {
     
     let titleBox:UITextField = {
         let n =  UITextField()
-        n.font = UIFont.init(customFont: .MavenProBold, withSize: 30)
+        n.font = UIFont.init(customFont: .MavenProBold, withSize: 25)
         n.textAlignment = .center
-        n.backgroundColor = .clear
-        n.textColor = UIColor.cellColor.withAlphaComponent(1)
-        n.attributedPlaceholder = NSAttributedString.init(string: "category name", attributes: [NSAttributedStringKey.foregroundColor:UIColor.cellColor.withAlphaComponent(0.6)])
+        n.backgroundColor = UIColor.cellColor.withAlphaComponent(0.5)
+        n.layer.cornerRadius = 5
+        n.textColor = UIColor.white.withAlphaComponent(1)
+        n.attributedPlaceholder = NSAttributedString.init(string: "category name", attributes: [NSAttributedStringKey.foregroundColor:UIColor.cellColor.withAlphaComponent(0.3)])
         return n
     }()
 
@@ -137,8 +163,8 @@ class NewClassView: UIStackView, UITextFieldDelegate {
         let g = GPLabel(withOutDraw: true)
         g.backgroundColor = UIColor.clear
         g.textColor = UIColor.boxTitleColor
-        g.textAlignment = .left
-        g.text = "Earned %"
+        g.textAlignment = .center
+        g.text = "earned %"
         g.font = UIFont.init(customFont: .MavenProBold, withSize: 15)
         return g
     }()
@@ -146,8 +172,8 @@ class NewClassView: UIStackView, UITextFieldDelegate {
         let g = GPLabel(withOutDraw: false)
         g.backgroundColor = UIColor.clear
         g.textColor = UIColor.boxTitleColor
-        g.textAlignment = .left
-        g.text = "Weight %"
+        g.textAlignment = .center
+        g.text = "weight %"
         g.font = UIFont.init(customFont: .MavenProBold, withSize: 15)
         return g
     }()
@@ -155,8 +181,8 @@ class NewClassView: UIStackView, UITextFieldDelegate {
         let g = GPLabel(withOutDraw: false)
         g.backgroundColor = UIColor.clear
         g.textColor = UIColor.boxTitleColor
-        g.textAlignment = .left
-        g.text = "Category Name"
+        g.textAlignment = .center
+        g.text = ""
         g.font = UIFont.init(customFont: .MavenProBold, withSize: 15)
         return g
     }()
@@ -167,7 +193,7 @@ class NewClassView: UIStackView, UITextFieldDelegate {
         g.textColor = UIColor.boxTitleColor
         g.textAlignment = .center
         g.numberOfLines = 3
-        g.text = "category weights already add up to 100% \n change category weights or remove a category \n before adding another category"
+        g.text = "category weights already add up to 100% remove a category to continue"
         g.font = UIFont.init(customFont: .MavenProBold, withSize: 25)
         return g
     }()
@@ -176,6 +202,12 @@ class NewClassView: UIStackView, UITextFieldDelegate {
     
     
     func phaseTwo() {
+        if self.subviews.count != 0 {
+            for v in self.subviews {
+                v.removeFromSuperview()
+            }
+        }
+        
         if self.percentages.isEmpty {
             isFull = true
             self.addArrangedSubview(maximumLabel)
@@ -198,12 +230,13 @@ class NewClassView: UIStackView, UITextFieldDelegate {
             self.titleBox.delegate = self
             
             NSLayoutConstraint.activate([
-                label0.heightAnchor.constraint(equalTo: stack.heightAnchor),
-                label1.heightAnchor.constraint(equalTo: stack.heightAnchor),
+                label0.widthAnchor.constraint(equalTo: stack.widthAnchor, multiplier: 0.5),
+                label1.widthAnchor.constraint(equalTo: stack.widthAnchor, multiplier: 0.5),
                 titleBoxTitle.heightAnchor.constraint(equalToConstant: 25),
-                titleBox.heightAnchor.constraint(equalToConstant: 50),
-                stack.heightAnchor.constraint(equalToConstant: 25),
-                type_pick.heightAnchor.constraint(equalTo: self.heightAnchor, constant: -100),
+                titleBox.heightAnchor.constraint(equalToConstant: 30),
+                stack.heightAnchor.constraint(equalToConstant: 50),
+                
+                type_pick.heightAnchor.constraint(equalTo: self.heightAnchor, constant: -105),
                 ])
         }
 
@@ -226,7 +259,7 @@ extension NewClassView: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if component == 0 {
-            return "EARNED $"
+            return "EARNED %"
         }
         return "% OF TOTAL"
     }

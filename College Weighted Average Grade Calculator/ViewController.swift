@@ -82,6 +82,7 @@ class CatCell:UITableViewCell {
         n.textAlignment = .left
         n.backgroundColor = .clear
         n.textColor = UIColor.cellTextColor
+        n.isEnabled = false
         return n
     }()
     
@@ -90,7 +91,7 @@ class CatCell:UITableViewCell {
         t.font = UIFont.init(customFont: .MavenProBold, withSize: 15)
         t.backgroundColor = .clear
         t.textAlignment = .center
-    
+        t.isEnabled = false
         t.textColor = UIColor.cellTextColor
         return t
     }()
@@ -101,7 +102,7 @@ class CatCell:UITableViewCell {
         t.backgroundColor = .clear
         t.textAlignment = .center
         t.textColor = UIColor.cellTextColor
-
+        t.isEnabled = false
         return t
     }()
     
@@ -143,7 +144,7 @@ class CatCell:UITableViewCell {
     var rwidth3:NSLayoutConstraint!
     override func awakeFromNib() {
      
-        removeButton.setFATitleColor(color: UIColor.init(red: Int( arc4random_uniform(255)), green: Int( arc4random_uniform(255)), blue: Int( arc4random_uniform(255))))
+        removeButton.setFATitleColor(color: UIColor.init(red: Int( arc4random_uniform(0)), green: Int( arc4random_uniform(255)), blue: Int( arc4random_uniform(255))))
         if !exists {
             exists = true
             self.backgroundColor = .clear
@@ -223,7 +224,7 @@ extension MainController: UITableViewDelegate, UITableViewDataSource, DeleteProt
             self.tb.reloadData {
                 //upon completion of reload, re calculate. wait this aint fkin necessary; the model already updated!
                 let totalPercent = calculate_average()
-                self.percentView.centerLabel.text = String(describing: totalPercent)
+                self.percentView.centerLabel.text = String(describing: totalPercent) + "%"
                 self.gradeView.centerLabel.text = get_grade_from_average(percent: totalPercent)
             }
         }
@@ -241,13 +242,15 @@ extension MainController: UITableViewDelegate, UITableViewDataSource, DeleteProt
         let cell = tableView.dequeueReusableCell(withIdentifier: "CatCell", for: indexPath) as! CatCell
         cell.removingClass = removingClass
         cell.awakeFromNib()
+
         cell.cat.text = model.classes[indexPath.item].name
         cell.earnedBox.text = model.classes[indexPath.item].earned
         cell.totalBox.text = model.classes[indexPath.item].total
-        cell.cat.delegate = self
-        cell.earnedBox.delegate = self
-        cell.totalBox.delegate = self
+//        cell.cat.delegate = self
+//        cell.earnedBox.delegate = self
+//        cell.totalBox.delegate = self
         cell.deli = self
+        
         cell.removeButton.tag = indexPath.item
 
         cell.selectionStyle = .none
@@ -311,13 +314,17 @@ class MainController: UIViewController, UITextFieldDelegate {
         NSLayoutConstraint.activate(new_class_cons)
         
         tb.alpha = 0
-        
-        minusButton.gestureRecognizers?.removeAll()
         plusButton.gestureRecognizers?.removeAll()
         
-        minusButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.cancelAddingClass)))
-        plusButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.completeAddingClass)))
+        if new_class_view.isFull {
+            plusButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.cancelAddingClass)))
+        } else {
+            plusButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.completeAddingClass)))
+        }
         
+        minusButton.gestureRecognizers?.removeAll()
+        minusButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.cancelAddingClass)))
+      
         minusButton.label.setFAIcon(icon: .FAThumbsDown, iconSize: 15)
         plusButton.label.setFAIcon(icon: .FAThumbsUp, iconSize: 15)
     }
@@ -362,12 +369,15 @@ class MainController: UIViewController, UITextFieldDelegate {
         removingClass = true
         minusButton.gestureRecognizers?.removeAll()
         minusButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.doneRemoving)))
+        plusButton.gestureRecognizers?.removeAll()
+        plusButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.doneRemoving)))
         
         minusButton.text = "done"
+    
         tb.reloadData {
             //upon completion of reload, re calculate. wait this aint fkin necessary; the model already updated!
             let totalPercent = calculate_average()
-            self.percentView.centerLabel.text = String(describing: totalPercent)
+            self.percentView.centerLabel.text = String(describing: totalPercent) + "%"
             self.gradeView.centerLabel.text = get_grade_from_average(percent: totalPercent)
         }
         
@@ -389,6 +399,8 @@ class MainController: UIViewController, UITextFieldDelegate {
         minusButton.label.setFAIcon(icon: .FAMinus, iconSize: 15)
         minusButton.gestureRecognizers?.removeAll()
         minusButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.remove_class)))
+        plusButton.gestureRecognizers?.removeAll()
+        plusButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.add_class)))
     }
     
     @objc func cancelAddingClass() {
@@ -408,14 +420,14 @@ class MainController: UIViewController, UITextFieldDelegate {
         var alert:Alert!
         
         if new_class_view.formFilled {
-            alert = Alert(title: "success", message: "category added", duration: 2)
+            alert = Alert(title: "success", message: "category added", duration: 1)
             cancelAddingClass()
             let newClass = classModel(name: new_class_view.type_name, earned: new_class_view.selected_earned_percentage, total: new_class_view.selected_percentage_oftotal)
             model.classes.append(newClass)
             tb.reloadData {
                 //upon completion of reload, re calculate. wait this aint fkin necessary; the model already updated!
                 let totalPercent = calculate_average()
-                self.percentView.centerLabel.text = String(describing: totalPercent)
+                self.percentView.centerLabel.text = String(describing: totalPercent) + "%"
                 self.gradeView.centerLabel.text = get_grade_from_average(percent: totalPercent)
             }
             //success
@@ -431,7 +443,7 @@ class MainController: UIViewController, UITextFieldDelegate {
     }
     
     var currentField:UITextField = UITextField()
-    
+    var needsModelUpdate:Bool = false
     func textFieldDidBeginEditing(_ textField: UITextField) {
         view.animateView(direction: .up, distance: 150)
 //        dismissButton.alpha = 0.01
@@ -439,6 +451,13 @@ class MainController: UIViewController, UITextFieldDelegate {
         currentField = textField
     }
     
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        needsModelUpdate = true
+        tb.reloadData {
+            print("complete")
+        }
+    }
+
     @objc func dismissField() {
         currentField.resignFirstResponder()
         view.animateView(direction: .down, distance: 0)
@@ -614,7 +633,7 @@ class MainController: UIViewController, UITextFieldDelegate {
         
         
         let totalPercent = calculate_average()
-        self.percentView.centerLabel.text = String(describing: totalPercent)
+        self.percentView.centerLabel.text = String(describing: totalPercent) + "%"
         self.gradeView.centerLabel.text = get_grade_from_average(percent: totalPercent)
 
       

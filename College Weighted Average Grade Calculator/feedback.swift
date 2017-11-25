@@ -132,9 +132,9 @@ class FeedbackView:UIView, UITextViewDelegate {
         return n
     }()
     
-    let s0 = emojiBro(emoji: "😃")//iconView(type: .FAFrownO)
+    let s0 = emojiBro(emoji: "😤")//iconView(type: .FAFrownO)
     let s1 = emojiBro(emoji: "😐")//iconView(type: .FAMehO)
-    let s2 = emojiBro(emoji: "😤")//iconView(type: .FAFrownO)
+    let s2 = emojiBro(emoji: "😃")//iconView(type: .FAFrownO)
 //    😃😐😤
     
     
@@ -158,6 +158,10 @@ class FeedbackView:UIView, UITextViewDelegate {
         s1.addTarget(self, action: #selector(self.dismissAlert), for: .touchUpInside)
         s2.addTarget(self, action: #selector(self.dismissAlert), for: .touchUpInside)
 
+        s0.tag = 1
+        s1.tag = 2
+        s2.tag = 3
+      
         NSLayoutConstraint.activate([
             boxView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             boxView.centerYAnchor.constraint(equalTo: self.centerYAnchor),

@@ -7,7 +7,9 @@
 //
 
 import UIKit
-
+import Firebase
+import FirebaseDatabase
+import FirebaseCore
 
 class Actions {
     
@@ -23,6 +25,7 @@ class Actions {
     let deli = UIApplication.shared.delegate as! AppDelegate
     
     //
+            var ref: DatabaseReference!
     var feedbackView:FeedbackView!
     
     @objc func feedback() {
@@ -35,27 +38,43 @@ class Actions {
     }
     
     @objc func sendFeedback(sender:UIButton) {
-        let message:String = feedbackView.message
+        var message:String = feedbackView.message
         var satisfaction:CGFloat!
-        var satisfactionRatio:CGFloat!
+//        var satisfactionRatio:CGFloat!
     
         switch sender.tag {
         case 0:
             satisfaction = 3
-            satisfactionRatio = 3/3 //smile
+//            satisfactionRatio = 3/3 //smile
         case 1:
             satisfaction = 2
-            satisfactionRatio = 2/3 //hmm
+//            satisfactionRatio = 2/3 //hmm
         case 2:
             satisfaction = 1
-            satisfactionRatio = 1/3 //frown
+//            satisfactionRatio = 1/3 //frown
         default:
             break
         }
+    
+        if message == "tell us here what you want to see differently then choose an emoji matching how you feel about this app. or just tap an emoji." {
+            message = "no written feedback."
+        }
         
+        ref = Database.database().reference()
+      
+//        self.ref.child("cgafeedback").childByAutoId()
+//        self.ref.child("cgafeedback").setValuesForKeys(["message":message, "satisfaction":satisfaction])
+     
+        let key = ref.child("cgafeedback").childByAutoId().key
+        let post = ["message": message,
+                    "satisfaction": satisfaction] as [String : Any]
+        let childUpdates = ["/cgafeedback/\(key)": post]
+        ref.updateChildValues(childUpdates)
+//        self.db.child("users").child(uid!).updateChildValues(["scanHistory":Model.instance.userSettings.getScanHistoryArray()])
+//        ref.database.setValue(["message":message, "satisfaction":satisfaction], forKey: "cgafeedback")
         //request with feedback
-        //satisfactionRequest params being -> ?message=message&satisfaction=satisfaction&satisfactionRatio=satisfactionRatio
-        
+        //satisfactionRequestse params being -> ?message=message&satisfaction=satisfaction&satisfactionRatio=satisfactionRatio
+     
     }
     
     @objc func moon() {

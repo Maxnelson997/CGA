@@ -62,11 +62,11 @@
 
 - [x] popup for feedback
 
-- [ ] make /apps page on maxthedev.com
+- [x] make /apps page on maxthedev.com
 
-- [ ] make an api endpoint /cgafeedback?message=''&satisfaction='' to retrieve user feedback
+- [x] make an api endpoint /cgafeedback?message=''&satisfaction='' to retrieve user feedback -- ended up using firebase
 
-- [ ] make a /cga page on maxthedev.com to display satisfaction percentage and user feedback messages
+- [x] make a /cga page on maxthedev.com to display satisfaction percentage and user feedback messages -- ended up using firebase will do original objective eventually though.
 
 ## Final Objectives
 

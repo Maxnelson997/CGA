@@ -30,6 +30,7 @@
 		79D570311FC41634005F323E /* extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D570301FC41634005F323E /* extension.swift */; };
 		79D570331FC41654005F323E /* GPModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D570321FC41654005F323E /* GPModel.swift */; };
 		79D570351FC41665005F323E /* GPCellViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D570341FC41664005F323E /* GPCellViews.swift */; };
+		79F74CB01FCA1F0400BFF3B5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79F74CAF1FCA1F0400BFF3B5 /* GoogleService-Info.plist */; };
 		AFC7CB8547F5395932D468D7 /* Pods_College_Weighted_Average_Grade_Calculator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C93AF0DA908952E63A4C593 /* Pods_College_Weighted_Average_Grade_Calculator.framework */; };
 		D25A0BBA1C44D73885C60BA9 /* Pods_College_Weighted_Average_Grade_CalculatorTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EA0DF2B2FA423980A3BBB16 /* Pods_College_Weighted_Average_Grade_CalculatorTests.framework */; };
 /* End PBXBuildFile section */
@@ -86,6 +87,7 @@
 		79D570301FC41634005F323E /* extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extension.swift; sourceTree = "<group>"; };
 		79D570321FC41654005F323E /* GPModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPModel.swift; sourceTree = "<group>"; };
 		79D570341FC41664005F323E /* GPCellViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GPCellViews.swift; path = "../../hmm/MaxSwift/college-gpa-calculator/college-gpa-calculator/GPCellViews.swift"; sourceTree = "<group>"; };
+		79F74CAF1FCA1F0400BFF3B5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7C93AF0DA908952E63A4C593 /* Pods_College_Weighted_Average_Grade_Calculator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_College_Weighted_Average_Grade_Calculator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB24B7BAC3614CAD0766D4BE /* Pods-College Weighted Average Grade CalculatorTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-College Weighted Average Grade CalculatorTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-College Weighted Average Grade CalculatorTests/Pods-College Weighted Average Grade CalculatorTests.release.xcconfig"; sourceTree = "<group>"; };
 		E4D4487DE4F50B0B331E24B9 /* Pods-College Weighted Average Grade CalculatorUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-College Weighted Average Grade CalculatorUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-College Weighted Average Grade CalculatorUITests/Pods-College Weighted Average Grade CalculatorUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 		796036AB1FC2A8F4002E8FA3 /* College Weighted Average Grade Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				79F74CAF1FCA1F0400BFF3B5 /* GoogleService-Info.plist */,
 				79D5701F1FC41409005F323E /* Maven_Pro */,
 				79D5702A1FC41442005F323E /* GPLabel.swift */,
 				796036AC1FC2A8F4002E8FA3 /* AppDelegate.swift */,
@@ -335,6 +338,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				79D570271FC41409005F323E /* OFL.txt in Resources */,
+				79F74CB01FCA1F0400BFF3B5 /* GoogleService-Info.plist in Resources */,
 				79D570291FC41409005F323E /* MavenPro-Bold.ttf in Resources */,
 				796036BA1FC2A8F4002E8FA3 /* LaunchScreen.storyboard in Resources */,
 				79D570251FC41409005F323E /* MavenPro-Black.ttf in Resources */,
@@ -678,7 +682,7 @@
 				DEVELOPMENT_TEAM = VETRU2J3NX;
 				INFOPLIST_FILE = "College Weighted Average Grade Calculator/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.maxnelsondevelopment.College-Weighted-Average-Grade-Calculator";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.maxnelsondevelopment.College-Course-Average-Calculator";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -694,7 +698,7 @@
 				DEVELOPMENT_TEAM = VETRU2J3NX;
 				INFOPLIST_FILE = "College Weighted Average Grade Calculator/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.maxnelsondevelopment.College-Weighted-Average-Grade-Calculator";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.maxnelsondevelopment.College-Course-Average-Calculator";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -37,19 +37,24 @@ class Alert:UIView {
     }
     
     var alertView:TitleView = {
-        let m = TitleView(title: "heads up", viewRadius: 23, containsCenterLabel: true, centerText: "this is an alert boi.")
-//        m.label.font = UIFont.init(customFont: .MavenProRegular, withSize: 20)
-//        m.label.numberOfLines = 3
+
+        
+        let m = TitleView(title: "heads up", viewRadius: 20, containsCenterLabel: true, centerText: "unk", draws: true)
+        m.label.textColor = .white
+        m.centerLabel.numberOfLines = 3
+        m.centerLabel.font = UIFont.init(customFont: .MavenProBold, withSize: 20)
+        m.label.textAlignment = .center
         return m
     }()
     
+
     let dismissLabel:GPLabel = {
         let g = GPLabel()
         g.backgroundColor = UIColor.clear
-        g.textColor = UIColor.boxTitleColor
+        g.textColor = UIColor.white
         g.textAlignment = .center
         g.text = "ok"
-        g.font = UIFont.init(customFont: .MavenProBold, withSize: 25)
+        g.font = UIFont.init(customFont: .MavenProBold, withSize: 20)
         return g
     }()
     
@@ -65,20 +70,28 @@ class Alert:UIView {
         }
     }
     
+    var stack:UIStackView = {
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.spacing = 20
+        stack.axis = .vertical
+        return stack
+    }()
+    
     func phaseTwo() {
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.dismissAlert)))
-        self.backgroundColor = UIColor.boxTitleColor.withAlphaComponent(0.5)
-        self.addSubview(alertView)
-        self.addSubview(dismissLabel)
+        self.backgroundColor = UIColor.boxTitleColor.withAlphaComponent(0.9)
+        self.addSubview(stack)
+        stack.addArrangedSubview(alertView)
+        stack.addArrangedSubview(dismissLabel)
+        
         NSLayoutConstraint.activate([
-            alertView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            alertView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            alertView.widthAnchor.constraint(equalToConstant: 250),
-            alertView.heightAnchor.constraint(equalToConstant: 250),
-            
-            dismissLabel.topAnchor.constraint(equalTo: alertView.bottomAnchor, constant: 10),
-            dismissLabel.widthAnchor.constraint(equalTo: alertView.widthAnchor, multiplier: 1),
-            dismissLabel.heightAnchor.constraint(equalToConstant: 50)
+            stack.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            stack.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            stack.widthAnchor.constraint(equalToConstant: 200),
+            stack.heightAnchor.constraint(equalToConstant: 400),
+            alertView.heightAnchor.constraint(equalTo: stack.heightAnchor, multiplier: 1/2),
+            dismissLabel.heightAnchor.constraint(equalTo: stack.heightAnchor, multiplier: 1/2)
             ])
         
     }

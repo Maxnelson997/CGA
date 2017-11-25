@@ -381,7 +381,7 @@ class MainController: UIViewController, UITextFieldDelegate {
             self.tb.reloadData {
                 //upon completion of reload, re calculate. wait this aint fkin necessary; the model already updated!
                 let totalPercent = calculate_average()
-                self.percentView.centerLabel.text = String(describing: totalPercent)
+                self.percentView.centerLabel.text = String(describing: totalPercent) + "%"
                 self.gradeView.centerLabel.text = get_grade_from_average(percent: totalPercent)
             }
         }
@@ -420,10 +420,10 @@ class MainController: UIViewController, UITextFieldDelegate {
             }
             //success
         } else if new_class_view.isFull {
-            alert = Alert(title: "Heads Up", message: "Categories Already Add Up To 100%.")
+            alert = Alert(title: "Heads Up", message: "categories already add up to 100%")
         } else {
             //cmon bill, pls fill the damn form out.
-            alert = Alert(title: "Heads Up", message: "Categories Already Add Up To 100%.")
+            alert = Alert(title: "heads up", message: "form incomplete")
         }
     
         view.addSubview(alert)
@@ -470,7 +470,6 @@ class MainController: UIViewController, UITextFieldDelegate {
 
     var percentView:TitleView = {
         let m = TitleView(title: "percent", viewRadius: 23, containsCenterLabel: true, centerText: "81%")
-
         return m
     }()
     

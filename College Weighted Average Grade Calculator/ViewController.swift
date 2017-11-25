@@ -141,7 +141,8 @@ class CatCell:UITableViewCell {
     var rwidth2:NSLayoutConstraint!
     var rwidth3:NSLayoutConstraint!
     override func awakeFromNib() {
-        removeButton.setFATitleColor(color: UIColor.init(red: Int(arc4random_uniform(255)), green: Int(arc4random_uniform(255)), blue: Int(arc4random_uniform(255))))
+        let extractedExpr = arc4random_uniform(255)
+        removeButton.setFATitleColor(color: UIColor.init(red: Int(extractedExpr), green: Int(extractedExpr), blue: Int(extractedExpr)))
         if !exists {
             exists = true
             self.backgroundColor = .clear
@@ -282,9 +283,10 @@ class MainController: UIViewController, UITextFieldDelegate {
     
     func transitionTheme() {
         
-        mView.removeFromSuperview()
-        mView = MaxView(frame: UIScreen.main.bounds)
-        view.insertSubview(mView, at: 0)
+//        mView.removeFromSuperview()
+//        mView = MaxView()
+//        view.insertSubview(mView, at: 0)
+//        NSLayoutConstraint.activate(mView.getConstraintsOfView(to: view))
         catsContainer.label.textColor = UIColor.boxTitleColor
         gradeView.label.textColor = UIColor.boxTitleColor
         percentView.label.textColor = UIColor.boxTitleColor
@@ -298,6 +300,8 @@ class MainController: UIViewController, UITextFieldDelegate {
         p.backgroundColor = UIColor.clear
         return p
     }()
+    var menu:SideMenu!
+
     var new_class_cons:[NSLayoutConstraint]!
     
     @objc func add_class() {
@@ -316,6 +320,40 @@ class MainController: UIViewController, UITextFieldDelegate {
         
         minusButton.text = "cancel"
         plusButton.text = "add class"
+    }
+    var alph:CGFloat = 1
+    var distance:CGFloat = 0
+    var show:Bool = false
+    
+    func showMenu() {
+        var anim:Double = 0
+        
+        show = !show
+        if show {
+            alph = 1
+            distance = 80
+            anim = 0.2
+        } else {
+            alph = 0
+            distance = 0
+            anim = 0.2
+        }
+        
+        self.menWidth.constant = distance
+        UIView.animate(withDuration: anim) {
+            self.menu.tb.alpha = self.alph
+//            self.menu.alpha = self.alph
+            self.menu.label.alpha = self.alph
+//             self.menu.tb.transform = CGAffineTransform(translationX: self.distance - 80, y: 0)
+         
+        }
+        
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 3, initialSpringVelocity: 8, options: .curveEaseOut, animations: {
+            self.view.layoutIfNeeded()
+            self.container.transform = CGAffineTransform(translationX: self.distance, y: 0)
+            
+        }, completion: { finished in
+        })
     }
     
     var removingClass:Bool = false
@@ -478,15 +516,27 @@ class MainController: UIViewController, UITextFieldDelegate {
         return s
     }()
 
+    var menWidth:NSLayoutConstraint!
     var mView:MaxView!
+    var container:UIView = {
+        let c = UIView()
+        c.translatesAutoresizingMaskIntoConstraints = false
+        return c
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        mView = MaxView(frame: UIScreen.main.bounds)
-        self.view.addSubview(mView)
+        menu = SideMenu()
+//        mView = MaxView()
+        
+//        self.view.addSubview(mView)
+        self.view.addSubview(container)
+        container.backgroundColor = .clear
+        NSLayoutConstraint.activate(container.getConstraintsOfView(to: view))
+//        NSLayoutConstraint.activate(mView.getConstraintsOfView(to: view))
         plusButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.add_class)))
         minusButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.remove_class)))
-        view.addSubview(mainStack)
+        container.addSubview(mainStack)
         NSLayoutConstraint.activate(mainStack.getConstraintsOfView(to: view, withInsets: UIEdgeInsets(top: 80, left: 30, bottom: 20, right: -30)))
 
         topStack.addArrangedSubview(percentView)
@@ -506,7 +556,7 @@ class MainController: UIViewController, UITextFieldDelegate {
         mainStack.addArrangedSubview(controlStack)
         mainStack.addArrangedSubview(spacer1)
         
-        view.addSubview(dismissButton)
+        container.addSubview(dismissButton)
         NSLayoutConstraint.activate(dismissButton.getConstraintsOfView(to: view))
         dismissButton.addTarget(self, action: #selector(self.dismissField), for: .touchUpInside)
         
@@ -530,6 +580,15 @@ class MainController: UIViewController, UITextFieldDelegate {
             topStack.heightAnchor.constraint(equalTo: percentView.widthAnchor),
             catsContainer.heightAnchor.constraint(lessThanOrEqualTo: mainStack.heightAnchor, multiplier: 1),
             catsContainer.widthAnchor.constraint(equalTo: mainStack.widthAnchor, multiplier: 1)
+            ])
+        view.addSubview(menu)
+        menWidth = menu.widthAnchor.constraint(equalToConstant: 0)
+        NSLayoutConstraint.activate([
+            menu.leftAnchor.constraint(equalTo: view.leftAnchor),
+            menu.topAnchor.constraint(equalTo: view.topAnchor),
+            menu.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            menWidth
+            
             ])
         //stackview
         

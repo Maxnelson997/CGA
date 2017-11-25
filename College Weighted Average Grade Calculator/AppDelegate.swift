@@ -19,12 +19,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var navigationController:UINavigationController!
 
     var main_controller:MainController!
-    var menu:SideMenu!
+    var mainColor:MaxView!
+    
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        mainColor = MaxView(frame: UIScreen.main.bounds)
         window = UIWindow(frame: UIScreen.main.bounds)
+        window?.addSubview(mainColor)
         
         navigationController = UINavigationController()
         main_controller = MainController()
@@ -36,22 +40,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.rootViewController = navigationController
         window!.makeKeyAndVisible()
         
-        
-        menu = SideMenu()
-        main_controller.view.addSubview(menu)
-        menu.setup()
- 
         return true
     }
-
     
     @objc func PopSide() {
-        menu.showMenu()
+        main_controller.showMenu()
     }
     
     @objc func ChangeTheme() {
         GPModel.sharedInstance.dtheme = !GPModel.sharedInstance.dtheme
-        menu.transitionTheme()
+        mainColor.removeFromSuperview()
+        mainColor = MaxView(frame: UIScreen.main.bounds)
+        window?.insertSubview(mainColor, at: 0)
+        main_controller.menu.transitionTheme()
         main_controller.transitionTheme()
         if GPModel.sharedInstance.dtheme {
             main_controller.navigationItem.rightBarButtonItem = BarButton(withIcon: FAType.FACircle, withSelector: #selector(self.ChangeTheme))

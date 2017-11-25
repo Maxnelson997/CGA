@@ -17,13 +17,13 @@ class IconCell:UITableViewCell {
         b.backgroundColor = UIColor.boxBottom
         b.layer.masksToBounds = true
         b.layer.cornerRadius = 15
-        b.isUserInteractionEnabled = false
         return b
     }()
 
     var icon:FAType!
     
     override func awakeFromNib() {
+        
         contentView.addSubview(iconView)
         iconView.setFAIcon(icon: icon, iconSize: 35, forState: .normal)
         iconView.setFATitleColor(color: UIColor.boxTitleColor)
@@ -34,7 +34,10 @@ class IconCell:UITableViewCell {
             iconView.widthAnchor.constraint(equalToConstant: 50),
             iconView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor, constant: 15)
             ])
+        
+     
     }
+
     override func prepareForReuse() {
         iconView.removeFromSuperview()
     }
@@ -56,7 +59,7 @@ extension SideMenu: UITableViewDelegate, UITableViewDataSource {
         cell.awakeFromNib()
         cell.selectionStyle = .none
         cell.backgroundColor = .clear
-        cell.isUserInteractionEnabled = false
+
         return cell
     }
     
@@ -64,6 +67,8 @@ extension SideMenu: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70
     }
+    
+
     
     
 }
@@ -74,14 +79,14 @@ class SideMenu: UIView {
         .FAInstagram,
         .FAShare,
         .FAWPExplorer,
-        .FAGrav,
-        .FAMeetup,
-        .FAMicrochip,
-        .FAGithub,
-        .FASend,
-        .FAUniversalAccess,
-        .FAShoppingCart,
-        .FAStackOverflow,
+//        .FAGrav,
+//        .FAMeetup,
+//        .FAMicrochip,
+//        .FAGithub,
+//        .FASend,
+//        .FAUniversalAccess,
+//        .FAShoppingCart,
+//        .FAStackOverflow,
         .FASignOut
         
     ]
@@ -102,8 +107,7 @@ class SideMenu: UIView {
     
     let v = (UIApplication.shared.delegate as! AppDelegate).main_controller.view
 
-    var wid:NSLayoutConstraint!
-    var tbwid:NSLayoutConstraint!
+
     
     let label:GPLabel = {
         let g = GPLabel(withOutDraw: true)
@@ -115,107 +119,60 @@ class SideMenu: UIView {
         return g
     }()
     
-    
     func phaseTwo() {
-
-
+//        self.addSubview(bg)
+        self.addSubview(label)
+        self.addSubview(tb)
+        self.backgroundColor = .clear
+        NSLayoutConstraint.activate([
+            label.topAnchor.constraint(equalTo: self.topAnchor, constant: 80),
+            label.heightAnchor.constraint(equalToConstant: 50),
+            label.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 15),
+            
+            
+            tb.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 0),
+            tb.leftAnchor.constraint(equalTo: self.leftAnchor),
+            tb.rightAnchor.constraint(equalTo: self.rightAnchor),
+            tb.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            ])
+//        NSLayoutConstraint.activate(bg.getConstraintsOfView(to: self))
+        
+//        NSLayoutConstraint.activate(tb.getConstraintsOfView(to: self))
+        
+        tb.dataSource = self
+        tb.delegate = self
+        
+//        self.tb.transform = CGAffineTransform(translationX: -80, y: 0)
+        
     }
+    
+
     
     var bg = MaxView()
     
     func transitionTheme() {
         label.textColor = UIColor.boxTitleColor
-        bg.removeFromSuperview()
-        bg = MaxView()
-        bg.translatesAutoresizingMaskIntoConstraints = false
-        self.insertSubview(bg, at: 0)
-        bg.isUserInteractionEnabled = false
-        
-        NSLayoutConstraint.activate(bg.getConstraintsOfView(to: self))
+//        bg.removeFromSuperview()
+//        bg = MaxView()
+//        bg.translatesAutoresizingMaskIntoConstraints = false
+//        self.insertSubview(bg, at: 0)
+//        NSLayoutConstraint.activate(bg.getConstraintsOfView(to: self))
+ 
     }
     
     var tb:UITableView = {
-        let t = UITableView(frame: .zero)
+        let t = UITableView()
         t.translatesAutoresizingMaskIntoConstraints = false
         t.backgroundColor = .clear
+        t.showsVerticalScrollIndicator = false
         t.separatorColor = .clear
         t.separatorStyle = .none
         t.register(IconCell.self, forCellReuseIdentifier: "IconCell")
         return t
     }()
     
-    func setup() {
-        wid = self.widthAnchor.constraint(equalToConstant: 1)
-        tbwid = tb.widthAnchor.constraint(equalToConstant: 80)
-       
-//        self.backgroundColor = UIColor.bgTop
-        self.addSubview(bg)
-        
-        self.addSubview(label)
-        v?.addSubview(tb)
-        
-        label.alpha = 0
-        tb.alpha = 0
+ 
 
-        NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: (v?.topAnchor)!, constant: 80),
-            label.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 15),
-            label.heightAnchor.constraint(equalToConstant: 50),
-            
-            tb.topAnchor.constraint(equalTo: label.bottomAnchor),
-            tb.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            tbwid,
-            tb.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            
-            ])
-        bg.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate(bg.getConstraintsOfView(to: self))
-        NSLayoutConstraint.activate([
-            self.rightAnchor.constraint(equalTo: (v?.leftAnchor)!),
-            self.topAnchor.constraint(equalTo: (v?.topAnchor)!),
-            self.bottomAnchor.constraint(equalTo: (v?.bottomAnchor)!),
-            wid
-            ])
-        tb.dataSource = self
-        tb.delegate = self
-    }
-    
-    var alph:CGFloat = 1
-    var distance:CGFloat = 80
-    
-    func showMenu() {
-        var anim:Double = 0
-        if wid.constant == 1 {
-            wid.constant = 80
-            alph = 1
-            distance = 80
-            tbwid.constant = 80
-            anim = 0.4
-        } else {
-            wid.constant = 1
-            alph = 0
-            distance = 0
-            tbwid.constant = 1
-            anim = 0.1
-        }
-        
-        UIView.animate(withDuration: anim) {
-            self.label.alpha = self.alph
-            self.tb.alpha = self.alph
-        }
-//        UIView.animate(withDuration: anim, delay: 0, usingSpringWithDamping: 3, initialSpringVelocity: 5, options: .curveEaseOut, animations: {
-   
-//        }, completion: nil)
-        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 3, initialSpringVelocity: 8, options: .curveEaseOut, animations: {
-            self.window?.layoutIfNeeded()
-    
-            self.v?.transform = CGAffineTransform(translationX: self.distance, y: 0)
-
-        }, completion: { finished in 
-                self.tb.reloadData()
-            
-        })
-    }
 
 
 }

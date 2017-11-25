@@ -58,9 +58,17 @@
 
 - [x] Disable plus button when user is minusing categories
 
-## Final Objectives
+## Next Objectives
 
-- [ ] popup for feedback
+- [x] popup for feedback
+
+- [ ] make /apps page on maxthedev.com
+
+- [ ] make an api endpoint /cgafeedback?message=''&satisfaction='' to retrieve user feedback
+
+- [ ] make a /cga page on maxthedev.com to display satisfaction percentage and user feedback messages
+
+## Final Objectives
 
 - [ ] logo 
  
@@ -69,3 +77,4 @@
 - [ ] launch screen image
 
 - [ ] upload and finalizations on itunes connect
+

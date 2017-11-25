@@ -15,9 +15,10 @@ class FeedbackView:UIView, UITextViewDelegate {
             textView.text = nil
             textView.textColor = UIColor.black
         }
+    
         self.gestureRecognizers?.removeAll()
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard)))
-        boxView.animateView(direction: .up, distance: 150)
+        boxView.animateView(direction: .up, distance: 120)
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {

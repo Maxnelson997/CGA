@@ -28,8 +28,8 @@ class Alert:UIView {
         self.duration = duration
         self.alertTitle = title
         self.alertMessage = message
-        self.timerStart()
         phaseTwo()
+        self.timerStart()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -67,7 +67,7 @@ class Alert:UIView {
     
     func phaseTwo() {
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.dismissAlert)))
-        self.backgroundColor = UIColor.boxTitleColor.withAlphaComponent(0.9)
+        self.backgroundColor = UIColor.boxTitleColor.withAlphaComponent(0.5)
         self.addSubview(alertView)
         self.addSubview(dismissLabel)
         NSLayoutConstraint.activate([

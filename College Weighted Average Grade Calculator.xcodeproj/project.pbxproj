@@ -17,6 +17,8 @@
 		796036BA1FC2A8F4002E8FA3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 796036B81FC2A8F4002E8FA3 /* LaunchScreen.storyboard */; };
 		796036C51FC2A8F4002E8FA3 /* College_Weighted_Average_Grade_CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796036C41FC2A8F4002E8FA3 /* College_Weighted_Average_Grade_CalculatorTests.swift */; };
 		796036D01FC2A8F4002E8FA3 /* College_Weighted_Average_Grade_CalculatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796036CF1FC2A8F4002E8FA3 /* College_Weighted_Average_Grade_CalculatorUITests.swift */; };
+		797327B61FC8FB27002BD9B3 /* MenuActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797327B51FC8FB27002BD9B3 /* MenuActions.swift */; };
+		797327B81FC90FA6002BD9B3 /* alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797327B71FC90FA6002BD9B3 /* alert.swift */; };
 		79D570251FC41409005F323E /* MavenPro-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79D570201FC41409005F323E /* MavenPro-Black.ttf */; };
 		79D570261FC41409005F323E /* MavenPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79D570211FC41409005F323E /* MavenPro-Regular.ttf */; };
 		79D570271FC41409005F323E /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 79D570221FC41409005F323E /* OFL.txt */; };
@@ -70,6 +72,8 @@
 		796036CB1FC2A8F4002E8FA3 /* College Weighted Average Grade CalculatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "College Weighted Average Grade CalculatorUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		796036CF1FC2A8F4002E8FA3 /* College_Weighted_Average_Grade_CalculatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = College_Weighted_Average_Grade_CalculatorUITests.swift; sourceTree = "<group>"; };
 		796036D11FC2A8F4002E8FA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		797327B51FC8FB27002BD9B3 /* MenuActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuActions.swift; sourceTree = "<group>"; };
+		797327B71FC90FA6002BD9B3 /* alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alert.swift; sourceTree = "<group>"; };
 		79D570201FC41409005F323E /* MavenPro-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MavenPro-Black.ttf"; sourceTree = "<group>"; };
 		79D570211FC41409005F323E /* MavenPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MavenPro-Regular.ttf"; sourceTree = "<group>"; };
 		79D570221FC41409005F323E /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
@@ -175,6 +179,8 @@
 				796036BB1FC2A8F4002E8FA3 /* Info.plist */,
 				796036B31FC2A8F4002E8FA3 /* College_Weighted_Average_Grade_Calculator.xcdatamodeld */,
 				794E1AEE1FC65F6600C02404 /* SideMenu.swift */,
+				797327B51FC8FB27002BD9B3 /* MenuActions.swift */,
+				797327B71FC90FA6002BD9B3 /* alert.swift */,
 			);
 			path = "College Weighted Average Grade Calculator";
 			sourceTree = "<group>";
@@ -499,10 +505,12 @@
 				79D570311FC41634005F323E /* extension.swift in Sources */,
 				796036AF1FC2A8F4002E8FA3 /* ViewController.swift in Sources */,
 				793C41F71FC542EE0063CA46 /* NewClassView.swift in Sources */,
+				797327B61FC8FB27002BD9B3 /* MenuActions.swift in Sources */,
 				796036AD1FC2A8F4002E8FA3 /* AppDelegate.swift in Sources */,
 				79D5702B1FC41442005F323E /* GPLabel.swift in Sources */,
 				794E1AEF1FC65F6600C02404 /* SideMenu.swift in Sources */,
 				79D5702D1FC4144A005F323E /* GPView.swift in Sources */,
+				797327B81FC90FA6002BD9B3 /* alert.swift in Sources */,
 				79D570351FC41665005F323E /* GPCellViews.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

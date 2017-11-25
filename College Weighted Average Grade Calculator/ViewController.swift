@@ -90,6 +90,7 @@ class CatCell:UITableViewCell {
         t.font = UIFont.init(customFont: .MavenProBold, withSize: 15)
         t.backgroundColor = .clear
         t.textAlignment = .center
+    
         t.textColor = UIColor.cellTextColor
         return t
     }()
@@ -110,7 +111,7 @@ class CatCell:UITableViewCell {
         s.axis = .horizontal
 //        s.backgroundColor = .clear
         s.layer.cornerRadius = 6
-        s.layer.masksToBounds = true
+//        s.layer.masksToBounds = true
         return s
     }()
   
@@ -118,7 +119,7 @@ class CatCell:UITableViewCell {
         let v = UIView()
         v.translatesAutoresizingMaskIntoConstraints = false
         v.layer.cornerRadius = 6
-        v.layer.masksToBounds = true
+//        v.layer.masksToBounds = true
         return v
     }()
 
@@ -141,8 +142,8 @@ class CatCell:UITableViewCell {
     var rwidth2:NSLayoutConstraint!
     var rwidth3:NSLayoutConstraint!
     override func awakeFromNib() {
-        let extractedExpr = arc4random_uniform(255)
-        removeButton.setFATitleColor(color: UIColor.init(red: Int(extractedExpr), green: Int(extractedExpr), blue: Int(extractedExpr)))
+     
+        removeButton.setFATitleColor(color: UIColor.init(red: Int( arc4random_uniform(255)), green: Int( arc4random_uniform(255)), blue: Int( arc4random_uniform(255))))
         if !exists {
             exists = true
             self.backgroundColor = .clear
@@ -268,7 +269,7 @@ extension MainController: UITableViewDelegate, UITableViewDataSource, DeleteProt
         header.addSubview(TBHeader(frame: header.frame))
         header.backgroundColor = UIColor.cellHeaderColor
         header.layer.cornerRadius = 6
-        header.layer.masksToBounds = true
+//        header.layer.masksToBounds = true
         return header
     }
     
@@ -281,17 +282,15 @@ class MainController: UIViewController, UITextFieldDelegate {
 
     var header:UIView!
     
+    
+
     func transitionTheme() {
-        
-//        mView.removeFromSuperview()
-//        mView = MaxView()
-//        view.insertSubview(mView, at: 0)
-//        NSLayoutConstraint.activate(mView.getConstraintsOfView(to: view))
+
         catsContainer.label.textColor = UIColor.boxTitleColor
         gradeView.label.textColor = UIColor.boxTitleColor
         percentView.label.textColor = UIColor.boxTitleColor
         header.backgroundColor = UIColor.headerColor
-        
+
         
     }
     
@@ -306,6 +305,7 @@ class MainController: UIViewController, UITextFieldDelegate {
     
     @objc func add_class() {
         doneRemoving()
+        new_class_view.updateRemainingPercent()
         new_class_cons = new_class_view.getConstraintsOfView(to: catsContainer, withInsets: UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0))
         catsContainer.addSubview(new_class_view)
         NSLayoutConstraint.activate(new_class_cons)
@@ -318,8 +318,8 @@ class MainController: UIViewController, UITextFieldDelegate {
         minusButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.cancelAddingClass)))
         plusButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.completeAddingClass)))
         
-        minusButton.text = "cancel"
-        plusButton.text = "add class"
+        minusButton.label.setFAIcon(icon: .FAThumbsDown, iconSize: 15)
+        plusButton.label.setFAIcon(icon: .FAThumbsUp, iconSize: 15)
     }
     var alph:CGFloat = 1
     var distance:CGFloat = 0
@@ -341,7 +341,7 @@ class MainController: UIViewController, UITextFieldDelegate {
         
         self.menWidth.constant = distance
         UIView.animate(withDuration: anim) {
-            self.menu.tb.alpha = self.alph
+
 //            self.menu.alpha = self.alph
             self.menu.label.alpha = self.alph
 //             self.menu.tb.transform = CGAffineTransform(translationX: self.distance - 80, y: 0)
@@ -385,14 +385,15 @@ class MainController: UIViewController, UITextFieldDelegate {
                 self.gradeView.centerLabel.text = get_grade_from_average(percent: totalPercent)
             }
         }
-        minusButton.text = "-"
+//        minusButton.text = "-"
+        minusButton.label.setFAIcon(icon: .FAMinus, iconSize: 15)
         minusButton.gestureRecognizers?.removeAll()
         minusButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.remove_class)))
     }
     
     @objc func cancelAddingClass() {
-        minusButton.text = "-"
-        plusButton.text = "+"
+        minusButton.label.setFAIcon(icon: .FAMinus, iconSize: 15)
+        plusButton.label.setFAIcon(icon: .FAPlus, iconSize: 15)
         new_class_view.removeFromSuperview()
         
         minusButton.gestureRecognizers?.removeAll()
@@ -404,9 +405,10 @@ class MainController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func completeAddingClass() {
-  
+        var alert:Alert!
         
         if new_class_view.formFilled {
+            alert = Alert(title: "success", message: "category added", duration: 2)
             cancelAddingClass()
             let newClass = classModel(name: new_class_view.type_name, earned: new_class_view.selected_earned_percentage, total: new_class_view.selected_percentage_oftotal)
             model.classes.append(newClass)
@@ -417,11 +419,15 @@ class MainController: UIViewController, UITextFieldDelegate {
                 self.gradeView.centerLabel.text = get_grade_from_average(percent: totalPercent)
             }
             //success
+        } else if new_class_view.isFull {
+            alert = Alert(title: "Heads Up", message: "Categories Already Add Up To 100%.")
         } else {
             //cmon bill, pls fill the damn form out.
+            alert = Alert(title: "Heads Up", message: "Categories Already Add Up To 100%.")
         }
     
-
+        view.addSubview(alert)
+        
     }
     
     var currentField:UITextField = UITextField()
@@ -475,19 +481,18 @@ class MainController: UIViewController, UITextFieldDelegate {
     
     var catsContainer:TitleView = {
         let m = TitleView(title: "class categories", perfectSquare: false, viewRadius: 23)
-    
         return m
     }()
     
     var plusButton:TitleInView = {
         let m = TitleInView(title: "+", viewRadius: 15)
-
+        m.label.setFAIcon(icon: .FAPlus, iconSize: 15)
         return m
     }()
     
     var minusButton:TitleInView = {
         let m = TitleInView(title: "-", viewRadius: 15)
-        
+        m.label.setFAIcon(icon: .FAMinus, iconSize: 15)
         return m
     }()
     
@@ -526,6 +531,7 @@ class MainController: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         menu = SideMenu()
 //        mView = MaxView()
         
@@ -534,6 +540,7 @@ class MainController: UIViewController, UITextFieldDelegate {
         container.backgroundColor = .clear
         NSLayoutConstraint.activate(container.getConstraintsOfView(to: view))
 //        NSLayoutConstraint.activate(mView.getConstraintsOfView(to: view))
+
         plusButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.add_class)))
         minusButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.remove_class)))
         container.addSubview(mainStack)
@@ -610,7 +617,10 @@ class MainController: UIViewController, UITextFieldDelegate {
         let totalPercent = calculate_average()
         self.percentView.centerLabel.text = String(describing: totalPercent)
         self.gradeView.centerLabel.text = get_grade_from_average(percent: totalPercent)
-        
+
+      
+ 
+      
         
     }
 

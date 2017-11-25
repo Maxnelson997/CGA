@@ -40,7 +40,7 @@ class NewClassView: UIStackView, UITextFieldDelegate {
         b.backgroundColor = UIColor.cellColor
         b.isEnabled = false
         b.layer.cornerRadius = 6
-        b.layer.masksToBounds = true
+//        b.layer.masksToBounds = true
         b.translatesAutoresizingMaskIntoConstraints = false
         return b
     }()
@@ -58,12 +58,29 @@ class NewClassView: UIStackView, UITextFieldDelegate {
         }
     }
     
+    func updateRemainingPercent() {
+        var p:[String] = []
+        for i in 1 ..< get_remaining_percent() { //101
+            p.append(String(describing: i) + "%")
+        }
+        self.percentages = p
+        self.type_pick.reloadAllComponents()
+    }
+    
 
     let model = GPModel.sharedInstance
     
-    let percentages:[String] = {
+    var percentages:[String] = {
         var p:[String] = []
-        for i in 1 ..< 101 {
+        for i in 1 ..< get_remaining_percent() { //101
+            p.append(String(describing: i) + "%")
+        }
+        return p
+    }()
+    
+    let earnPercentages:[String] = {
+        var p:[String] = []
+        for i in 1 ..< 101 { //101
             p.append(String(describing: i) + "%")
         }
         return p
@@ -72,7 +89,7 @@ class NewClassView: UIStackView, UITextFieldDelegate {
     fileprivate var type_pick:UIPickerView = {
         let s = UIPickerView()
         s.layer.cornerRadius = 12
-        s.layer.masksToBounds = true
+//        s.layer.masksToBounds = true
         s.translatesAutoresizingMaskIntoConstraints = false
         return s
     }()
@@ -109,24 +126,87 @@ class NewClassView: UIStackView, UITextFieldDelegate {
         return n
     }()
 
+    var stack:UIStackView = {
+       let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.axis = .horizontal
+        return stack
+    }()
+    
+    let label0:GPLabel = {
+        let g = GPLabel(withOutDraw: true)
+        g.backgroundColor = UIColor.clear
+        g.textColor = UIColor.boxTitleColor
+        g.textAlignment = .left
+        g.text = "Earned %"
+        g.font = UIFont.init(customFont: .MavenProBold, withSize: 15)
+        return g
+    }()
+    let label1:GPLabel = {
+        let g = GPLabel(withOutDraw: false)
+        g.backgroundColor = UIColor.clear
+        g.textColor = UIColor.boxTitleColor
+        g.textAlignment = .left
+        g.text = "Weight %"
+        g.font = UIFont.init(customFont: .MavenProBold, withSize: 15)
+        return g
+    }()
+    let titleBoxTitle:GPLabel = {
+        let g = GPLabel(withOutDraw: false)
+        g.backgroundColor = UIColor.clear
+        g.textColor = UIColor.boxTitleColor
+        g.textAlignment = .left
+        g.text = "Category Name"
+        g.font = UIFont.init(customFont: .MavenProBold, withSize: 15)
+        return g
+    }()
+    
+    let maximumLabel:GPLabel = {
+        let g = GPLabel(withOutDraw: false)
+        g.backgroundColor = UIColor.clear
+        g.textColor = UIColor.boxTitleColor
+        g.textAlignment = .center
+        g.numberOfLines = 3
+        g.text = "category weights already add up to 100% \n change category weights or remove a category \n before adding another category"
+        g.font = UIFont.init(customFont: .MavenProBold, withSize: 25)
+        return g
+    }()
+    
+    var isFull:Bool = false
+    
     
     func phaseTwo() {
+        if self.percentages.isEmpty {
+            isFull = true
+            self.addArrangedSubview(maximumLabel)
+            NSLayoutConstraint.activate([maximumLabel.heightAnchor.constraint(equalTo: self.heightAnchor)])
+        } else {
+            isFull = false
+            self.addSubview(button)
+            NSLayoutConstraint.activate(button.getConstraintsOfView(to: self))
+            
+            button.addTarget(self, action: #selector(self.dismissText), for: .touchUpInside)
+            self.axis = .vertical
+            self.addArrangedSubview(titleBoxTitle)
+            self.addArrangedSubview(titleBox)
+            self.addArrangedSubview(stack)
+            self.addArrangedSubview(type_pick)
+            stack.addArrangedSubview(label0)
+            stack.addArrangedSubview(label1)
+            self.type_pick.delegate = self
+            self.type_pick.dataSource = self
+            self.titleBox.delegate = self
+            
+            NSLayoutConstraint.activate([
+                label0.heightAnchor.constraint(equalTo: stack.heightAnchor),
+                label1.heightAnchor.constraint(equalTo: stack.heightAnchor),
+                titleBoxTitle.heightAnchor.constraint(equalToConstant: 25),
+                titleBox.heightAnchor.constraint(equalToConstant: 50),
+                stack.heightAnchor.constraint(equalToConstant: 25),
+                type_pick.heightAnchor.constraint(equalTo: self.heightAnchor, constant: -100),
+                ])
+        }
 
-        self.addSubview(button)
-        NSLayoutConstraint.activate(button.getConstraintsOfView(to: self))
-   
-        button.addTarget(self, action: #selector(self.dismissText), for: .touchUpInside)
-        self.axis = .vertical
-        self.addArrangedSubview(titleBox)
-        self.addArrangedSubview(type_pick)
-        self.type_pick.delegate = self
-        self.type_pick.dataSource = self
-        self.titleBox.delegate = self
-
-        NSLayoutConstraint.activate([
-            titleBox.heightAnchor.constraint(equalToConstant: 50),
-            type_pick.heightAnchor.constraint(equalTo: self.heightAnchor, constant: -50),
-            ])
     }
 
 }
@@ -137,7 +217,11 @@ extension NewClassView: UIPickerViewDataSource, UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if component == 0 {
+            return earnPercentages.count
+        }
         return percentages.count
+        
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
@@ -146,11 +230,13 @@ extension NewClassView: UIPickerViewDataSource, UIPickerViewDelegate {
         }
         return "% OF TOTAL"
     }
+
+    
     
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         var titleData:String!
 
-        titleData = percentages[row]
+        titleData = earnPercentages[row]
 
         let myTitle = NSAttributedString(string: titleData!, attributes: [NSAttributedStringKey.font:UIFont.init(customFont: .MavenProRegular, withSize: 15)!,NSAttributedStringKey.foregroundColor:UIColor.black])
         return myTitle
@@ -158,7 +244,7 @@ extension NewClassView: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if component == 0 {
-            selected_earned_percentage = percentages[row]
+            selected_earned_percentage = earnPercentages[row]
         } else {
             selected_percentage_oftotal = percentages[row]
         }

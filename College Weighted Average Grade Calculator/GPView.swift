@@ -26,7 +26,7 @@ class GPView: UIView {
     }
     
     func phaseTwo() {
-        self.layer.masksToBounds = true
+//        self.layer.masksToBounds = true
         self.layer.cornerRadius = 12
         self.backgroundColor = UIColor.darkGray.withAlphaComponent(0.2)
     }

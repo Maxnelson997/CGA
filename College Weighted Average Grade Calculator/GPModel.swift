@@ -36,9 +36,9 @@ class GPModel {
     var dtheme:Bool = false
     
     var classes:[classModel] = [
-        classModel(name: "Tests", earned: "74%", total: "60%"),
-        classModel(name: "Quiz", earned: "56%", total: "25%"),
-        classModel(name: "Homework", earned: "32%", total: "15%")
+        classModel(name: "Tests", earned: "88%", total: "60%"),
+        classModel(name: "Quiz", earned: "79%", total: "25%"),
+        classModel(name: "Homework", earned: "100%", total: "15%")
     ]
 
     var class_is_being_edited:Bool = false
@@ -351,5 +351,18 @@ func get_grade_from_average(percent:CGFloat) -> String {
         if r.range.contains(Double(percent)) {return r.value}
     }
     return "🤔"
+}
+
+
+func get_remaining_percent() -> Int {
+    var totalPercent:CGFloat = 101
+    for c in GPModel.sharedInstance.classes {
+        let index = c.total.index(c.total.startIndex, offsetBy: c.total.count - 1)
+        let percentListedString = c.total[..<index]
+        guard let percentageListedFloat = NumberFormatter().number(from: String(percentListedString)) else { return 0 }
+        let floatPercent = CGFloat(truncating: percentageListedFloat)
+        totalPercent -= floatPercent
+    }
+    return Int(totalPercent)
 }
     

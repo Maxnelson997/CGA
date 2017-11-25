@@ -15,19 +15,22 @@ class IconCell:UITableViewCell {
         b.titleLabel?.adjustsFontSizeToFitWidth = true
         b.translatesAutoresizingMaskIntoConstraints = false
         b.backgroundColor = UIColor.boxBottom
-        b.layer.masksToBounds = true
+        b.clipsToBounds = true
         b.layer.cornerRadius = 15
         return b
     }()
+    
+
 
     var icon:FAType!
     
     override func awakeFromNib() {
-        
+
         contentView.addSubview(iconView)
         iconView.setFAIcon(icon: icon, iconSize: 35, forState: .normal)
-        iconView.setFATitleColor(color: UIColor.boxTitleColor)
+        iconView.setFATitleColor(color: UIColor.boxTextColor)
 //        NSLayoutConstraint.activate(iconView.getConstraintsOfView(to: contentView, withInsets: UIEdgeInsets(top: 10, left: 33.75, bottom: -10, right: -33.75)))
+        
         NSLayoutConstraint.activate([
             iconView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             iconView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
@@ -44,6 +47,10 @@ class IconCell:UITableViewCell {
 }
 
 extension SideMenu: UITableViewDelegate, UITableViewDataSource {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        print("scrolling")
+    }
     //datasource
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -57,10 +64,30 @@ extension SideMenu: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "IconCell", for: indexPath) as! IconCell
         cell.icon = icons[indexPath.item]
         cell.awakeFromNib()
+        cell.iconView.tag = indexPath.item
+        cell.iconView.addTarget(self, action: #selector(self.performAction(sender:)), for: .touchUpInside)
         cell.selectionStyle = .none
         cell.backgroundColor = .clear
 
         return cell
+    }
+    
+    @objc func performAction(sender:UIButton) {
+        switch sender.tag {
+        case 0:
+            actions.moon()
+        case 1:
+            actions.instagram()
+        case 2:
+            actions.explore()
+        case 3:
+            actions.share()
+        case 4:
+            actions.exit()
+        default:
+            assert(false, "error performing action")
+            break
+        }
     }
     
     //delegate
@@ -74,11 +101,14 @@ extension SideMenu: UITableViewDelegate, UITableViewDataSource {
 }
 
 class SideMenu: UIView {
+    
+    let actions = Actions()
     var icons:[FAType] = [
-        .FAThumbsUp,
+        .FACircleO,
         .FAInstagram,
-        .FAShare,
         .FAWPExplorer,
+        .FAShare,
+        .FASignOut
 //        .FAGrav,
 //        .FAMeetup,
 //        .FAMicrochip,
@@ -87,9 +117,9 @@ class SideMenu: UIView {
 //        .FAUniversalAccess,
 //        .FAShoppingCart,
 //        .FAStackOverflow,
-        .FASignOut
-        
+
     ]
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         phaseTwo()
@@ -107,7 +137,6 @@ class SideMenu: UIView {
     
     let v = (UIApplication.shared.delegate as! AppDelegate).main_controller.view
 
-
     
     let label:GPLabel = {
         let g = GPLabel(withOutDraw: true)
@@ -115,11 +144,13 @@ class SideMenu: UIView {
         g.textColor = UIColor.boxTitleColor
         g.textAlignment = .center
         g.text = "settings"
+        g.alpha = 0
         g.font = UIFont.init(customFont: .MavenProBold, withSize: 20)
         return g
     }()
     
     func phaseTwo() {
+
 //        self.addSubview(bg)
         self.addSubview(label)
         self.addSubview(tb)
@@ -147,17 +178,24 @@ class SideMenu: UIView {
     }
     
 
-    
+
     var bg = MaxView()
     
     func transitionTheme() {
         label.textColor = UIColor.boxTitleColor
+        if GPModel.sharedInstance.dtheme {
+            icons[0] = .FACircle
+        } else { icons[0] = .FACircleO }
+        self.tb.reloadData {
+            print("loaded to change circle icon for theme")
+        }
 //        bg.removeFromSuperview()
 //        bg = MaxView()
 //        bg.translatesAutoresizingMaskIntoConstraints = false
 //        self.insertSubview(bg, at: 0)
 //        NSLayoutConstraint.activate(bg.getConstraintsOfView(to: self))
  
+
     }
     
     var tb:UITableView = {
@@ -168,10 +206,10 @@ class SideMenu: UIView {
         t.separatorColor = .clear
         t.separatorStyle = .none
         t.register(IconCell.self, forCellReuseIdentifier: "IconCell")
+        
         return t
     }()
     
- 
 
 
 

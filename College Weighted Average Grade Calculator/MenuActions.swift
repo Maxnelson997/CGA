@@ -44,19 +44,19 @@ class Actions {
     
         switch sender.tag {
         case 0:
-            satisfaction = 3
-//            satisfactionRatio = 3/3 //smile
+            satisfaction = 1
+//            satisfactionRatio = 3/3 //frown
         case 1:
             satisfaction = 2
 //            satisfactionRatio = 2/3 //hmm
         case 2:
-            satisfaction = 1
-//            satisfactionRatio = 1/3 //frown
+            satisfaction = 3
+//            satisfactionRatio = 1/3 //smile
         default:
             break
         }
     
-        if message == "tell us here what you want to see differently then choose an emoji matching how you feel about this app. or just tap an emoji." {
+        if message == "tap here to tell us here what you want to see differently then choose an emoji matching how you feel about this app. or just tap an emoji." {
             message = "no written feedback."
         }
         

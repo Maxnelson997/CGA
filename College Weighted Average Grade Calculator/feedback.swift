@@ -23,7 +23,7 @@ class FeedbackView:UIView, UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
-            textView.text = "tell us here what you want to see differently then choose an emoji matching how you feel about this app. or just tap an emoji."
+            textView.text = "tap here to tell us here what you want to see differently then choose an emoji matching how you feel about this app. or just tap an emoji."
             textView.textColor = UIColor.lightGray
         }
         boxView.animateView(direction: .down, distance: 0)
@@ -122,7 +122,7 @@ class FeedbackView:UIView, UITextViewDelegate {
     
     let feedbackText:UITextView = {
         let n =  UITextView()
-        n.text = "tell us here what you want to see differently then choose an emoji matching how you feel about this app. or just tap an emoji."
+        n.text = "tap here to tell us here what you want to see differently then choose an emoji matching how you feel about this app. or just tap an emoji."
         n.textColor = UIColor.lightGray
         n.font = UIFont.init(customFont: .MavenProBold, withSize: 15)
         n.textAlignment = .left
@@ -158,9 +158,9 @@ class FeedbackView:UIView, UITextViewDelegate {
         s1.addTarget(self, action: #selector(self.dismissAlert), for: .touchUpInside)
         s2.addTarget(self, action: #selector(self.dismissAlert), for: .touchUpInside)
 
-        s0.tag = 1
-        s1.tag = 2
-        s2.tag = 3
+        s0.tag = 0
+        s1.tag = 1
+        s2.tag = 2
       
         NSLayoutConstraint.activate([
             boxView.centerXAnchor.constraint(equalTo: self.centerXAnchor),

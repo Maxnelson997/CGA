@@ -23,6 +23,40 @@ class Actions {
     let deli = UIApplication.shared.delegate as! AppDelegate
     
     //
+    var feedbackView:FeedbackView!
+    
+    @objc func feedback() {
+        feedbackView = FeedbackView()
+        deli.main_controller.view.addSubview(feedbackView)
+        
+        feedbackView.s0.addTarget(self, action: #selector(self.sendFeedback(sender:)), for: .touchUpInside)
+        feedbackView.s1.addTarget(self, action: #selector(self.sendFeedback(sender:)), for: .touchUpInside)
+        feedbackView.s2.addTarget(self, action: #selector(self.sendFeedback(sender:)), for: .touchUpInside)
+    }
+    
+    @objc func sendFeedback(sender:UIButton) {
+        let message:String = feedbackView.message
+        var satisfaction:CGFloat!
+        var satisfactionRatio:CGFloat!
+    
+        switch sender.tag {
+        case 0:
+            satisfaction = 3
+            satisfactionRatio = 3/3 //smile
+        case 1:
+            satisfaction = 2
+            satisfactionRatio = 2/3 //hmm
+        case 2:
+            satisfaction = 1
+            satisfactionRatio = 1/3 //frown
+        default:
+            break
+        }
+        
+        //request with feedback
+        //satisfactionRequest params being -> ?message=message&satisfaction=satisfaction&satisfactionRatio=satisfactionRatio
+        
+    }
     
     @objc func moon() {
         //change theme

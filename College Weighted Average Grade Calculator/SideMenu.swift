@@ -77,13 +77,17 @@ extension SideMenu: UITableViewDelegate, UITableViewDataSource {
         case 0:
             actions.moon()
         case 1:
-            actions.instagram()
+            actions.feedback()
         case 2:
-            actions.explore()
+            actions.instagram()
         case 3:
-            actions.share()
+            actions.explore()
         case 4:
+            actions.share()
+        case 5:
             actions.exit()
+//        case 5:
+//            actions.feedback()
         default:
             assert(false, "error performing action")
             break
@@ -94,10 +98,7 @@ extension SideMenu: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70
     }
-    
 
-    
-    
 }
 
 class SideMenu: UIView {
@@ -105,10 +106,12 @@ class SideMenu: UIView {
     let actions = Actions()
     var icons:[FAType] = [
         .FACircleO,
+        .FAEnvelopeO,
         .FAInstagram,
         .FAWPExplorer,
-        .FAShare,
-        .FASignOut
+        .FASendO,
+        .FASignOut,
+
 //        .FAGrav,
 //        .FAMeetup,
 //        .FAMicrochip,

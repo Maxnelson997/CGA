@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Font_Awesome_Swift
 
 enum Direction:CGFloat {
     case up = -1
@@ -86,6 +87,49 @@ extension UIColor {
 
     
     
+}
+
+func iconView(type:FAType, color:UIColor = UIColor.boxTextColor) -> UIButton {
+    let containerButton = UIButton()
+    let b = UIButton()
+    b.titleLabel?.adjustsFontSizeToFitWidth = true
+    b.translatesAutoresizingMaskIntoConstraints = false
+    b.backgroundColor = UIColor.boxBottom
+    b.layer.cornerRadius = 15
+    
+    containerButton.addSubview(b)
+    b.setFAIcon(icon: type, iconSize: 35, forState: .normal)
+    b.setFATitleColor(color: color)
+    
+    NSLayoutConstraint.activate([
+        b.topAnchor.constraint(equalTo: containerButton.topAnchor, constant: 10),
+        b.bottomAnchor.constraint(equalTo: containerButton.bottomAnchor, constant: -10),
+        b.widthAnchor.constraint(equalToConstant: 50),
+        b.centerXAnchor.constraint(equalTo: containerButton.centerXAnchor, constant: 15),
+        containerButton.heightAnchor.constraint(equalToConstant: 70),
+        containerButton.widthAnchor.constraint(equalToConstant: 70)
+        ])
+    
+    return containerButton
+}
+
+func emojiBro(emoji:String) -> UIButton {
+    let b = UIButton()
+    b.backgroundColor = UIColor.clear
+    b.layer.cornerRadius = 15
+    let e = UILabel()
+    e.font = UIFont.init(customFont: .MavenProBold, withSize: 35)
+    e.adjustsFontSizeToFitWidth = true
+    e.translatesAutoresizingMaskIntoConstraints = false
+    e.backgroundColor = .clear
+    e.layer.cornerRadius = 15
+    e.text = emoji
+    e.textAlignment = .center
+    
+    b.addSubview(e)
+    NSLayoutConstraint.activate(e.getConstraintsOfView(to: b))
+    
+    return b
 }
 
 extension UIColor {

@@ -1,4 +1,18 @@
-## objectives.
+
+
+
+## Objectives VERSION 2.1
+
+- [ ] in app purchase
+
+- [ ] fix bugs
+
+- [ ] do stuff according to user feedback
+
+
+###objectives for verision 2.0 below. completed.
+
+## objectives VERSION 2.0.
 
 - [x] add percent label
 
@@ -70,11 +84,15 @@
 
 ## Final Objectives
 
-- [ ] logo 
+- [x] logo 
  
-- [ ] makeappicon
+- [x] makeappicon
 
-- [ ] launch screen image
+- [x] launch screen image
 
-- [ ] upload and finalizations on itunes connect
+- [x] upload and finalizations on itunes connect
+
+
+
+
 

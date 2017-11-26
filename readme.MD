@@ -10,7 +10,7 @@
 - [ ] do stuff according to user feedback
 
 
-###objectives for verision 2.0 below. completed.
+# objectives for verision 2.0 below. completed.
 
 ## objectives VERSION 2.0.
 

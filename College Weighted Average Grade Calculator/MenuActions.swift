@@ -93,7 +93,24 @@ class Actions {
     
     @objc func explore() {
         //guide to developer page in appstore
-        openInBrowser(url: URL(string: "http://www.maxthedev.com/apps")!)
+        ref = Database.database().reference()
+        
+        //        self.ref.child("cgafeedback").childByAutoId()
+        //        self.ref.child("cgafeedback").setValuesForKeys(["message":message, "satisfaction":satisfaction])
+        
+
+        ref.child("exploreURL").observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            let value = snapshot.value as? NSDictionary
+            let link = value?["link"] as? String ?? ""
+            self.openInBrowser(url: URL(string: link)!)
+            
+        }) { (error) in
+            print(error.localizedDescription)
+            self.openInBrowser(url: URL(string: "http://www.maxthedev.com/about-me")!)
+        }
+        
+        
     }
     
     @objc func share() {

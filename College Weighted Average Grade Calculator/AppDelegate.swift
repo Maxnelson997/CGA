@@ -35,12 +35,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         main_controller.navigationItem.rightBarButtonItem = BarButton(withIcon: FAType.FACircleO, withSelector: #selector(self.ChangeTheme))
         main_controller.navigationItem.leftBarButtonItem = BarButton(withIcon: FAType.FABars, withSelector: #selector(self.PopSide))
         navigationController.viewControllers = [main_controller]
-        
     
         window!.rootViewController = navigationController
         window!.makeKeyAndVisible()
         
-
         return true
     }
 

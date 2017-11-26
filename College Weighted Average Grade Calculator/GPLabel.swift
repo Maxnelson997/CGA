@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class GPLabel: UILabel {
 
     var withOutDraw:Bool = false

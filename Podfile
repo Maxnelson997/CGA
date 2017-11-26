@@ -6,7 +6,7 @@ target 'College Weighted Average Grade Calculator' do
   use_frameworks!
 
   # Pods for College Weighted Average Grade Calculator
-pod 'Firebase/Database'
+  pod 'Firebase/Database'
   pod 'Firebase/Core'
   pod 'Font-Awesome-Swift', '~> 1.6.2'
   target 'College Weighted Average Grade CalculatorTests' do

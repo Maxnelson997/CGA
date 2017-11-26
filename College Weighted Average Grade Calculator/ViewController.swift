@@ -597,6 +597,7 @@ class MainController: UIViewController, UITextFieldDelegate {
             plusButton.heightAnchor.constraint(equalToConstant: 35),
             minusButton.heightAnchor.constraint(equalToConstant: 35),
             percentView.widthAnchor.constraint(equalTo: mainStack.widthAnchor, multiplier: 0.5, constant: -10),
+         
             percentView.heightAnchor.constraint(greaterThanOrEqualTo: percentView.widthAnchor, constant: 50),
             gradeView.widthAnchor.constraint(equalTo: percentView.widthAnchor),
             gradeView.heightAnchor.constraint(equalTo: percentView.heightAnchor),
